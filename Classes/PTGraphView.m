@@ -186,14 +186,7 @@
 	
 	NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
-	for (int i = 0; i < 6; i++) {
-		/*int y = (i * step) * stepY;
-		int value = i * step;
-		
-		if (!zeroAsMinValue) {
-			value = i * step + minY;
-		}*/
-		
+	for (int i = 0; i < 6; i++) {		
 		int y = (i * step) * stepY;
 		float value = i * step;
 		
@@ -304,66 +297,85 @@
 	for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
 		
-		for (int j = 0; j < [values count] - 1; j++) {
-			int x = j * stepX;
-			int y = [[values objectAtIndex:j] intValue] * stepY;
-		
+		if ([values count] == 1) {
+			int x = (self.frame.size.width - 120) / 2;
+			int y = [[values objectAtIndex:0] intValue] * stepY;
+			
 			if (!zeroAsMinValue) {
-				y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
+				y = ([[values objectAtIndex:0] floatValue] - minY) * stepY;
 			}
 			
-			NSBezierPath *path = [NSBezierPath bezierPath];
-		
-			float lineDash[2];
-		
-			lineDash[0] = 6.0;
-			lineDash[1] = 6.0;
-		
-			[path setLineWidth:lineWidth];
-		
-			NSPoint startPoint = {x + offsetX, y + offsetY};
-						
-			x = (j + 1) * stepX;
-			y = [[values objectAtIndex:j + 1] intValue] * stepY;
-		
-			if (!zeroAsMinValue) {
-				y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
-			}
+			NSPoint point;
 			
-			NSPoint endPoint = {x + offsetX, y + offsetY};
-							
-			[path moveToPoint:startPoint];		
-			[path lineToPoint:endPoint];
-		
-			[path closePath];
-		
-			if ([dataSource respondsToSelector:@selector(graphView: colorForGraph:)]) {
-				[[dataSource graphView:self colorForGraph:i] set];
-			} else {
-				[[self colorByIndex:i] set];
-			}
+			point.x = x;
+			point.y = y;
 			
-			[path stroke];
-			
-			if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
-				pointInfo = [[[PTPointInfo alloc] init] autorelease];
-								
-				pointInfo.x = startPoint.x;
-				pointInfo.y = startPoint.y;
-				
-				if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-					pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
-				} else {
-					pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
-				}
-			}
+			bullet.color = [self colorByIndex:i];
+			[bullet drawAtPoint:point];
 
-			if (drawBullet) {
-				bullet.color = [self colorByIndex:i];
-				[bullet drawAtPoint:startPoint];
-			}
+			lastPoint = point;
+		} else {
+			for (int j = 0; j < [values count] - 1; j++) {
+				int x = j * stepX;
+				int y = [[values objectAtIndex:j] intValue] * stepY;
+
+				if (!zeroAsMinValue) {
+					y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
+				}
 			
-			lastPoint = endPoint;
+				NSBezierPath *path = [NSBezierPath bezierPath];
+		
+				float lineDash[2];
+				
+				lineDash[0] = 6.0;
+				lineDash[1] = 6.0;
+		
+				[path setLineWidth:lineWidth];
+		
+				NSPoint startPoint = {x + offsetX, y + offsetY};
+						
+				x = (j + 1) * stepX;
+				y = [[values objectAtIndex:j + 1] intValue] * stepY;
+		
+				if (!zeroAsMinValue) {
+					y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
+				}
+			
+				NSPoint endPoint = {x + offsetX, y + offsetY};
+							
+				[path moveToPoint:startPoint];		
+				[path lineToPoint:endPoint];
+		
+				[path closePath];
+		
+				if ([dataSource respondsToSelector:@selector(graphView: colorForGraph:)]) {
+					[[dataSource graphView:self colorForGraph:i] set];
+				} else {
+					[[self colorByIndex:i] set];
+				}
+			
+				[path stroke];
+			
+				if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
+					pointInfo = [[[PTPointInfo alloc] init] autorelease];
+								
+					pointInfo.x = startPoint.x;
+					pointInfo.y = startPoint.y;
+				
+					if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+						pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
+					} else {
+						pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
+					}
+				}
+
+				if (drawBullet) {
+					bullet.color = [self colorByIndex:i];
+					[bullet drawAtPoint:startPoint];
+				}
+			
+				lastPoint = endPoint;
+			}
 		}
 		
 		if (mousePoint.x > lastPoint.x - (stepX / 2) && mousePoint.x < lastPoint.x + (stepX / 2)) {
