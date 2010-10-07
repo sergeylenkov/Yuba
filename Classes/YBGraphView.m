@@ -1,19 +1,19 @@
 //
-//  PTGraphView.h
+//  YBGraphView.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 27.04.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTGraphView.h"
+#import "YBGraphView.h"
 
 #define OFFSET_X 60
 #define OFFSET_Y 30
 #define OFFSET_WITH_INFO_Y 60
 #define OFFSET_LEGENT 160
 
-@implementation PTGraphView
+@implementation YBGraphView
 
 @synthesize formatter;
 @synthesize drawAxesX;
@@ -69,8 +69,8 @@
 		self.infoFont = [NSFont fontWithName:@"Helvetica Neue" size:12];
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[PTMarker alloc] init];
-		self.bullet = [[PTBullet alloc] init];
+		self.marker = [[YBMarker alloc] init];
+		self.bullet = [[YBBullet alloc] init];
 		
 		self.showMarker = NO;
 		self.zeroAsMinValue = YES;
@@ -291,7 +291,7 @@
 	
 	stepX = (self.frame.size.width - 120) / ([series count] - 1);
 	
-	PTPointInfo *pointInfo = nil;
+	YBPointInfo *pointInfo = nil;
 	NSPoint lastPoint;
 	
 	for (int i = 0; i < [graphs count]; i++) {
@@ -357,7 +357,7 @@
 				[path stroke];
 			
 				if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
-					pointInfo = [[[PTPointInfo alloc] init] autorelease];
+					pointInfo = [[[YBPointInfo alloc] init] autorelease];
 								
 					pointInfo.x = startPoint.x;
 					pointInfo.y = startPoint.y;
@@ -379,7 +379,7 @@
 		}
 		
 		if (mousePoint.x > lastPoint.x - (stepX / 2) && mousePoint.x < lastPoint.x + (stepX / 2)) {
-			pointInfo = [[[PTPointInfo alloc] init] autorelease];
+			pointInfo = [[[YBPointInfo alloc] init] autorelease];
 			
 			pointInfo.x = lastPoint.x;
 			pointInfo.y = lastPoint.y;

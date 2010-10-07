@@ -10,20 +10,20 @@
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
 		A50EB220118C486000B638CC /* Yuba.h in Headers */ = {isa = PBXBuildFile; fileRef = A50EB21F118C486000B638CC /* Yuba.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A50EB351118C73F600B638CC /* PTChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50EB34F118C73F600B638CC /* PTChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A50EB352118C73F600B638CC /* PTChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50EB350118C73F600B638CC /* PTChartView.m */; };
-		A5480180118B3D000052B82C /* PTBullet.h in Headers */ = {isa = PBXBuildFile; fileRef = A548017E118B3D000052B82C /* PTBullet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5480181118B3D000052B82C /* PTBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A548017F118B3D000052B82C /* PTBullet.m */; };
-		A5B822FA11883DDD001CAFCF /* PTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F611883DDD001CAFCF /* PTMapView.m */; };
-		A5B822FC11883DDD001CAFCF /* PTPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F811883DDD001CAFCF /* PTPointInfo.m */; };
-		A5B823CF118855CD001CAFCF /* PTMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F511883DDD001CAFCF /* PTMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B823EB11885606001CAFCF /* PTPointInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F711883DDD001CAFCF /* PTPointInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B825311188616C001CAFCF /* PTMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8252F1188616C001CAFCF /* PTMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B825321188616C001CAFCF /* PTMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B825301188616C001CAFCF /* PTMarker.m */; };
-		A5B8268B11887FAD001CAFCF /* PTGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8268911887FAD001CAFCF /* PTGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B8268C11887FAD001CAFCF /* PTGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B8268A11887FAD001CAFCF /* PTGraphView.m */; };
-		A5E05CCE119BC6C500D7FDAB /* PTBarGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E05CCC119BC6C500D7FDAB /* PTBarGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5E05CCF119BC6C500D7FDAB /* PTBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E05CCD119BC6C500D7FDAB /* PTBarGraphView.m */; };
+		A50EB351118C73F600B638CC /* YBChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50EB34F118C73F600B638CC /* YBChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A50EB352118C73F600B638CC /* YBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50EB350118C73F600B638CC /* YBChartView.m */; };
+		A5480180118B3D000052B82C /* YBBullet.h in Headers */ = {isa = PBXBuildFile; fileRef = A548017E118B3D000052B82C /* YBBullet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5480181118B3D000052B82C /* YBBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A548017F118B3D000052B82C /* YBBullet.m */; };
+		A5B822FA11883DDD001CAFCF /* YBMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F611883DDD001CAFCF /* YBMapView.m */; };
+		A5B822FC11883DDD001CAFCF /* YBPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F811883DDD001CAFCF /* YBPointInfo.m */; };
+		A5B823CF118855CD001CAFCF /* YBMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F511883DDD001CAFCF /* YBMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5B823EB11885606001CAFCF /* YBPointInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F711883DDD001CAFCF /* YBPointInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5B825311188616C001CAFCF /* YBMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8252F1188616C001CAFCF /* YBMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5B825321188616C001CAFCF /* YBMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B825301188616C001CAFCF /* YBMarker.m */; };
+		A5B8268B11887FAD001CAFCF /* YBGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8268911887FAD001CAFCF /* YBGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5B8268C11887FAD001CAFCF /* YBGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B8268A11887FAD001CAFCF /* YBGraphView.m */; };
+		A5E05CCE119BC6C500D7FDAB /* YBBarGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5E05CCF119BC6C500D7FDAB /* YBBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,20 +35,20 @@
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Yuba.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Yuba.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50EB21F118C486000B638CC /* Yuba.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Yuba.h; path = Classes/Yuba.h; sourceTree = "<group>"; };
-		A50EB34F118C73F600B638CC /* PTChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTChartView.h; path = Classes/PTChartView.h; sourceTree = "<group>"; };
-		A50EB350118C73F600B638CC /* PTChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTChartView.m; path = Classes/PTChartView.m; sourceTree = "<group>"; };
-		A548017E118B3D000052B82C /* PTBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTBullet.h; path = Classes/PTBullet.h; sourceTree = "<group>"; };
-		A548017F118B3D000052B82C /* PTBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTBullet.m; path = Classes/PTBullet.m; sourceTree = "<group>"; };
-		A5B822F511883DDD001CAFCF /* PTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTMapView.h; path = Classes/PTMapView.h; sourceTree = "<group>"; };
-		A5B822F611883DDD001CAFCF /* PTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTMapView.m; path = Classes/PTMapView.m; sourceTree = "<group>"; };
-		A5B822F711883DDD001CAFCF /* PTPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPointInfo.h; path = Classes/PTPointInfo.h; sourceTree = "<group>"; };
-		A5B822F811883DDD001CAFCF /* PTPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPointInfo.m; path = Classes/PTPointInfo.m; sourceTree = "<group>"; };
-		A5B8252F1188616C001CAFCF /* PTMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTMarker.h; path = Classes/PTMarker.h; sourceTree = "<group>"; };
-		A5B825301188616C001CAFCF /* PTMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTMarker.m; path = Classes/PTMarker.m; sourceTree = "<group>"; };
-		A5B8268911887FAD001CAFCF /* PTGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTGraphView.h; path = Classes/PTGraphView.h; sourceTree = "<group>"; };
-		A5B8268A11887FAD001CAFCF /* PTGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTGraphView.m; path = Classes/PTGraphView.m; sourceTree = "<group>"; };
-		A5E05CCC119BC6C500D7FDAB /* PTBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTBarGraphView.h; path = Classes/PTBarGraphView.h; sourceTree = "<group>"; };
-		A5E05CCD119BC6C500D7FDAB /* PTBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTBarGraphView.m; path = Classes/PTBarGraphView.m; sourceTree = "<group>"; };
+		A50EB34F118C73F600B638CC /* YBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBChartView.h; path = Classes/YBChartView.h; sourceTree = "<group>"; };
+		A50EB350118C73F600B638CC /* YBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBChartView.m; path = Classes/YBChartView.m; sourceTree = "<group>"; };
+		A548017E118B3D000052B82C /* YBBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBullet.h; path = Classes/YBBullet.h; sourceTree = "<group>"; };
+		A548017F118B3D000052B82C /* YBBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBullet.m; path = Classes/YBBullet.m; sourceTree = "<group>"; };
+		A5B822F511883DDD001CAFCF /* YBMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMapView.h; path = Classes/YBMapView.h; sourceTree = "<group>"; };
+		A5B822F611883DDD001CAFCF /* YBMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMapView.m; path = Classes/YBMapView.m; sourceTree = "<group>"; };
+		A5B822F711883DDD001CAFCF /* YBPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBPointInfo.h; path = Classes/YBPointInfo.h; sourceTree = "<group>"; };
+		A5B822F811883DDD001CAFCF /* YBPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBPointInfo.m; path = Classes/YBPointInfo.m; sourceTree = "<group>"; };
+		A5B8252F1188616C001CAFCF /* YBMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMarker.h; path = Classes/YBMarker.h; sourceTree = "<group>"; };
+		A5B825301188616C001CAFCF /* YBMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMarker.m; path = Classes/YBMarker.m; sourceTree = "<group>"; };
+		A5B8268911887FAD001CAFCF /* YBGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBGraphView.h; path = Classes/YBGraphView.h; sourceTree = "<group>"; };
+		A5B8268A11887FAD001CAFCF /* YBGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBGraphView.m; path = Classes/YBGraphView.m; sourceTree = "<group>"; };
+		A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBarGraphView.h; path = Classes/YBBarGraphView.h; sourceTree = "<group>"; };
+		A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBarGraphView.m; path = Classes/YBBarGraphView.m; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -106,20 +106,20 @@
 			isa = PBXGroup;
 			children = (
 				A50EB21F118C486000B638CC /* Yuba.h */,
-				A5B8268911887FAD001CAFCF /* PTGraphView.h */,
-				A5B8268A11887FAD001CAFCF /* PTGraphView.m */,
-				A5E05CCC119BC6C500D7FDAB /* PTBarGraphView.h */,
-				A5E05CCD119BC6C500D7FDAB /* PTBarGraphView.m */,
-				A50EB34F118C73F600B638CC /* PTChartView.h */,
-				A50EB350118C73F600B638CC /* PTChartView.m */,
-				A5B822F511883DDD001CAFCF /* PTMapView.h */,
-				A5B822F611883DDD001CAFCF /* PTMapView.m */,
-				A5B822F711883DDD001CAFCF /* PTPointInfo.h */,
-				A5B822F811883DDD001CAFCF /* PTPointInfo.m */,
-				A5B8252F1188616C001CAFCF /* PTMarker.h */,
-				A5B825301188616C001CAFCF /* PTMarker.m */,
-				A548017E118B3D000052B82C /* PTBullet.h */,
-				A548017F118B3D000052B82C /* PTBullet.m */,
+				A5B8268911887FAD001CAFCF /* YBGraphView.h */,
+				A5B8268A11887FAD001CAFCF /* YBGraphView.m */,
+				A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */,
+				A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */,
+				A50EB34F118C73F600B638CC /* YBChartView.h */,
+				A50EB350118C73F600B638CC /* YBChartView.m */,
+				A5B822F511883DDD001CAFCF /* YBMapView.h */,
+				A5B822F611883DDD001CAFCF /* YBMapView.m */,
+				A5B822F711883DDD001CAFCF /* YBPointInfo.h */,
+				A5B822F811883DDD001CAFCF /* YBPointInfo.m */,
+				A5B8252F1188616C001CAFCF /* YBMarker.h */,
+				A5B825301188616C001CAFCF /* YBMarker.m */,
+				A548017E118B3D000052B82C /* YBBullet.h */,
+				A548017F118B3D000052B82C /* YBBullet.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -157,14 +157,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B823CF118855CD001CAFCF /* PTMapView.h in Headers */,
-				A5B823EB11885606001CAFCF /* PTPointInfo.h in Headers */,
-				A5B825311188616C001CAFCF /* PTMarker.h in Headers */,
-				A5B8268B11887FAD001CAFCF /* PTGraphView.h in Headers */,
-				A5480180118B3D000052B82C /* PTBullet.h in Headers */,
+				A5B823CF118855CD001CAFCF /* YBMapView.h in Headers */,
+				A5B823EB11885606001CAFCF /* YBPointInfo.h in Headers */,
+				A5B825311188616C001CAFCF /* YBMarker.h in Headers */,
+				A5B8268B11887FAD001CAFCF /* YBGraphView.h in Headers */,
+				A5480180118B3D000052B82C /* YBBullet.h in Headers */,
 				A50EB220118C486000B638CC /* Yuba.h in Headers */,
-				A50EB351118C73F600B638CC /* PTChartView.h in Headers */,
-				A5E05CCE119BC6C500D7FDAB /* PTBarGraphView.h in Headers */,
+				A50EB351118C73F600B638CC /* YBChartView.h in Headers */,
+				A5E05CCE119BC6C500D7FDAB /* YBBarGraphView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +197,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91B108733DA50010E9CD /* Build configuration list for PBXProject "Yuba" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* Yuba */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
@@ -224,13 +231,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B822FA11883DDD001CAFCF /* PTMapView.m in Sources */,
-				A5B822FC11883DDD001CAFCF /* PTPointInfo.m in Sources */,
-				A5B825321188616C001CAFCF /* PTMarker.m in Sources */,
-				A5B8268C11887FAD001CAFCF /* PTGraphView.m in Sources */,
-				A5480181118B3D000052B82C /* PTBullet.m in Sources */,
-				A50EB352118C73F600B638CC /* PTChartView.m in Sources */,
-				A5E05CCF119BC6C500D7FDAB /* PTBarGraphView.m in Sources */,
+				A5B822FA11883DDD001CAFCF /* YBMapView.m in Sources */,
+				A5B822FC11883DDD001CAFCF /* YBPointInfo.m in Sources */,
+				A5B825321188616C001CAFCF /* YBMarker.m in Sources */,
+				A5B8268C11887FAD001CAFCF /* YBGraphView.m in Sources */,
+				A5480181118B3D000052B82C /* YBBullet.m in Sources */,
+				A50EB352118C73F600B638CC /* YBChartView.m in Sources */,
+				A5E05CCF119BC6C500D7FDAB /* YBBarGraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

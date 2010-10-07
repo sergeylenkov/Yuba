@@ -1,17 +1,17 @@
 //
-//  PTGraphView.h
+//  YBBarGraphView.h
 //  Yuba
 //
-//  Created by Sergey Lenkov on 27.04.10.
+//  Created by Sergey Lenkov on 13.05.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PTMarker.h"
-#import "PTBullet.h"
-#import "PTPointInfo.h"
+#import "YBMarker.h"
+#import "YBBullet.h"
+#import "YBPointInfo.h"
 
-@interface PTGraphView : NSView {
+@interface YBBarGraphView : NSView {
 	NSMutableArray *series;
 	NSMutableArray *graphs;
 	NSMutableArray *legends;
@@ -23,27 +23,26 @@
 	BOOL drawInfo;
 	NSString *info;
 	BOOL drawLegend;
-	BOOL zeroAsMinValue;
-	
 	NSTrackingArea *trackingArea; 
 	NSPoint mousePoint;
-	
+	NSMutableArray *points;
 	BOOL showMarker;
 	BOOL hideMarker;
 	BOOL enableMarker;
-	
-	PTMarker *marker;
+	YBMarker *marker;
 	NSFont *font;
 	NSFont *infoFont;
 	NSFont *legendFont;
 	NSColor *backgroundColor;
-	NSColor *textColor;	
-	CGFloat lineWidth;
-	BOOL drawBullet;
-	PTBullet *bullet;
-	
+	NSColor *textColor;
+	NSColor *borderColor;
+	NSColor *highlightColor;
 	id delegate;
 	id dataSource;
+	CGFloat lineWidth;
+	CGFloat borderWidth;
+	BOOL onlyTopLine;
+	BOOL highlightBar;
 }
 
 @property (nonatomic, retain) NSNumberFormatter *formatter;
@@ -57,16 +56,18 @@
 @property (nonatomic, assign) BOOL showMarker;
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) id dataSource;
-@property (nonatomic, retain) PTMarker *marker;
-@property (nonatomic, retain) PTBullet *bullet;
+@property (nonatomic, retain) YBMarker *marker;
 @property (nonatomic, retain) NSFont *font;
 @property (nonatomic, retain) NSFont *infoFont;
 @property (nonatomic, retain) NSFont *legendFont;
 @property (nonatomic, retain) NSColor *backgroundColor;
 @property (nonatomic, retain) NSColor *textColor;
+@property (nonatomic, retain) NSColor *borderColor;
+@property (nonatomic, retain) NSColor *highlightColor;
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, assign) BOOL drawBullet;
-@property (nonatomic, assign) BOOL zeroAsMinValue;
+@property (nonatomic, assign) CGFloat borderWidth;
+@property (nonatomic, assign) BOOL onlyTopLine;
+@property (nonatomic, assign) BOOL highlightBar;
 
 - (void)draw;
 - (void)drawLegendInRect:(NSRect)rect;
@@ -75,26 +76,26 @@
 
 @end
 
-@protocol PTGraphViewDataSource
+@protocol YBBarGraphViewDataSource
 
 @optional
 
-- (NSColor *)graphView:(PTGraphView *)graph colorForGraph:(NSInteger)index;
-- (NSString *)graphView:(PTGraphView *)graph legendTitleForGraph:(NSInteger)index;
-- (NSString *)graphView:(PTGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
+- (NSColor *)barGraphView:(YBBarGraphView *)graph colorForGraph:(NSInteger)index;
+- (NSString *)barGraphView:(YBBarGraphView *)graph legendTitleForGraph:(NSInteger)index;
+- (NSString *)barGraphView:(YBBarGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
 
 @required
 
-- (NSInteger)numberOfGraphsInGraphView:(PTGraphView *)graph;
-- (NSArray *)graphView:(PTGraphView *)graph valuesForGraph:(NSInteger)index;
-- (NSArray *)seriesForGraphView:(PTGraphView *)graph;
+- (NSInteger)numberOfGraphsInBarGraphView:(YBBarGraphView *)graph;
+- (NSArray *)barGraphView:(YBBarGraphView *)graph valuesForGraph:(NSInteger)index;
+- (NSArray *)seriesForBarGraphView:(YBBarGraphView *)graph;
 
 @end
 
-@protocol PTGraphViewDelegate
+@protocol YBBarGraphViewDelegate
 
 @optional
 
-- (void)graphView:(PTGraphView *)graph mouseMovedAboveElement:(NSInteger)index;
+- (void)barGraphView:(YBBarGraphView *)graph mouseMovedAboveElement:(NSInteger)index;
 
 @end

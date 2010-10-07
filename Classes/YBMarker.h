@@ -1,5 +1,5 @@
 //
-//  PTMarker.h
+//  YBMarker.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 28.04.10.
@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 enum {
-	PTMarkerTypeRect = 0,
-	PTMarkerTypeRoundedRect = 1,
-	PTMarkerTypeRectWithArrow = 2
+	YBMarkerTypeRect = 0,
+	YBMarkerTypeRoundedRect = 1,
+	YBMarkerTypeRectWithArrow = 2
 };
 
-@interface PTMarker : NSObject {
+@interface YBMarker : NSObject {
 	NSFont *font;
 	NSColor *textColor;
 	NSColor *backgroundColor;

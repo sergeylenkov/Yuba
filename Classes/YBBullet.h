@@ -1,5 +1,5 @@
 //
-//  PTBullet.h
+//  YBBullet.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 30.04.10.
@@ -13,7 +13,7 @@ enum {
 	PTMarkerTypeSquare = 1
 };
 
-@interface PTBullet : NSObject {
+@interface YBBullet : NSObject {
 	NSColor *color;
 	NSColor *borderColor;
 	NSInteger size;

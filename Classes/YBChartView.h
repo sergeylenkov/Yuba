@@ -1,8 +1,8 @@
 #import <Cocoa/Cocoa.h>
-#import "PTMarker.h"
-#import "PTPointInfo.h"
+#import "YBMarker.h"
+#import "YBPointInfo.h"
 
-@interface PTChartView : NSView {
+@interface YBChartView : NSView {
 	NSMutableArray *series;
 	NSMutableArray *values;
 	NSMutableArray *legends;
@@ -18,7 +18,7 @@
 	BOOL enableMarker;
 	NSTrackingArea *trackingArea;
 	NSPoint mousePoint;
-	PTMarker *marker;
+	YBMarker *marker;
 	NSFont *font;
 	NSFont *infoFont;
 	NSFont *legendFont;
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) id delegate;
 @property (nonatomic, retain) id dataSource;
 @property (nonatomic, assign) NSInteger maxChartsCount;
-@property (nonatomic, retain) PTMarker *marker;
+@property (nonatomic, retain) YBMarker *marker;
 @property (nonatomic, assign) BOOL showMarker;
 @property (nonatomic, retain) NSFont *font;
 @property (nonatomic, retain) NSFont *infoFont;
@@ -50,23 +50,23 @@
 
 @end
 
-@protocol PTChartViewDataSource
+@protocol YBChartViewDataSource
 
 @optional
 
 - (NSColor *)colorForChart:(NSInteger)index;
-- (NSString *)chartView:(PTChartView *)chart legendTitleForChart:(NSString *)title withValue:(NSNumber *)value andPercent:(NSNumber *)percent;
-- (NSString *)chartView:(PTChartView *)chart markerTitleForChart:(NSString *)title withValue:(NSNumber *)value andPercent:(NSNumber *)percent;
+- (NSString *)chartView:(YBChartView *)chart legendTitleForChart:(NSString *)title withValue:(NSNumber *)value andPercent:(NSNumber *)percent;
+- (NSString *)chartView:(YBChartView *)chart markerTitleForChart:(NSString *)title withValue:(NSNumber *)value andPercent:(NSNumber *)percent;
 
 @required
 
 - (NSInteger)numberOfCharts;
-- (NSNumber *)chartView:(PTChartView *)chart valueForChart:(NSInteger)index;
-- (NSString *)chartView:(PTChartView *)chart titleForChart:(NSInteger)index;
+- (NSNumber *)chartView:(YBChartView *)chart valueForChart:(NSInteger)index;
+- (NSString *)chartView:(YBChartView *)chart titleForChart:(NSInteger)index;
 
 @end
 
-@protocol PTChartViewDelegate
+@protocol YBChartViewDelegate
 
 @optional
 

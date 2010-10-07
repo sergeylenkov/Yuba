@@ -1,14 +1,14 @@
 //
-//  PTMarker.m
+//  YBMarker.m
 //  Yuba
 //
 //  Created by Sergey Lenkov on 28.04.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTMarker.h"
+#import "YBMarker.h"
 
-@implementation PTMarker
+@implementation YBMarker
 
 @synthesize font;
 @synthesize textColor;
@@ -62,7 +62,7 @@
 	int rectWidth = width + 16;
 	int rectHeight = height + 8;
 	
-	if (type == PTMarkerTypeRect) {		
+	if (type == YBMarkerTypeRect) {		
 		NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(point.x - (rectWidth / 2), point.y + 4, rectWidth, rectHeight)];			
 		[path setLineWidth:borderWidht];
 		

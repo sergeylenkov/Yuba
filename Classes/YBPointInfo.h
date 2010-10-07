@@ -1,5 +1,5 @@
 //
-//  PTPointInfo.h
+//  YBPointInfo.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 27.04.10.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PTPointInfo : NSObject {
+@interface YBPointInfo : NSObject {
 	NSInteger x;
 	NSInteger y;
 	NSString *title;

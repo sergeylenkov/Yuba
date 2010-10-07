@@ -1,10 +1,10 @@
-#import "PTChartView.h"
+#import "YBChartView.h"
 
 #define OFFSET 20
 #define OFFSET_WITH_INFO 30
 #define OFFSET_LEGENT 140
 
-@implementation PTChartView
+@implementation YBChartView
 
 @synthesize series;
 @synthesize values;
@@ -46,7 +46,7 @@
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		self.infoFont = [NSFont systemFontOfSize:11];
 		
-		self.marker = [[PTMarker alloc] init];
+		self.marker = [[YBMarker alloc] init];
 		
 		self.showMarker = NO;
 		hideMarker = NO;
@@ -191,7 +191,7 @@
 	
 	[paragraphStyle release];
 	
-	PTPointInfo *pointInfo = nil;
+	YBPointInfo *pointInfo = nil;
 	
 	for (int i = 0; i < [chartValues count]; i++) {
 		float percents = [[chartValues objectAtIndex:i] floatValue] / percent;
@@ -215,16 +215,16 @@
 			if ([dataSource respondsToSelector:@selector(colorForChart:)]) {			
 				[[dataSource colorForChart:i] set];
 			} else {
-				[[PTChartView colorByIndex:i] set];
+				[[YBChartView colorByIndex:i] set];
 			}			
 		} else {
-			[[PTChartView colorByIndex:-1] set];
+			[[YBChartView colorByIndex:-1] set];
 		}
 		
 		[path fill];
 		
 		if ([path containsPoint:mousePoint]) {
-			pointInfo = [[[PTPointInfo alloc] init] autorelease];
+			pointInfo = [[[YBPointInfo alloc] init] autorelease];
 			pointInfo.x = mousePoint.x;
 			pointInfo.y = mousePoint.y;
 
@@ -235,9 +235,9 @@
 			}
 			
 			if (i < maxChartsCount) {
-				marker.backgroundColor = [PTChartView markerColorByIndex:i];
+				marker.backgroundColor = [YBChartView markerColorByIndex:i];
 			} else {
-				marker.backgroundColor = [PTChartView markerColorByIndex:-1];
+				marker.backgroundColor = [YBChartView markerColorByIndex:-1];
 			}
 		}
 		
@@ -352,9 +352,9 @@
 				NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName,  paragraphStyle, NSParagraphStyleAttributeName, nil];
 				
 				if (i < 5) {
-					[[PTChartView colorByIndex:i] set];
+					[[YBChartView colorByIndex:i] set];
 				} else {
-					[[PTChartView colorByIndex:-1] set];
+					[[YBChartView colorByIndex:-1] set];
 				}
 				
 				NSRectFill(NSMakeRect(rect.size.width - (OFFSET_LEGENT + 20), top - n * 30, 10, 10));				

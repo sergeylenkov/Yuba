@@ -1,14 +1,14 @@
 //
-//  PTPointInfo.m
+//  YBPointInfo.m
 //  Yuba
 //
 //  Created by Sergey Lenkov on 27.04.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTPointInfo.h"
+#import "YBPointInfo.h"
 
-@implementation PTPointInfo
+@implementation YBPointInfo
 
 @synthesize x;
 @synthesize y;

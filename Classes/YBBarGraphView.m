@@ -1,19 +1,19 @@
 //
-//  PTBarGraphView.m
+//  YBBarGraphView.m
 //  Yuba
 //
 //  Created by Sergey Lenkov on 13.05.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTBarGraphView.h"
+#import "YBBarGraphView.h"
 
 #define OFFSET_X 60
 #define OFFSET_Y 30
 #define OFFSET_WITH_INFO_Y 60
 #define OFFSET_LEGENT 160
 
-@implementation PTBarGraphView
+@implementation YBBarGraphView
 
 @synthesize formatter;
 @synthesize drawAxesX;
@@ -76,7 +76,7 @@
 		self.infoFont = [NSFont fontWithName:@"Helvetica Neue" size:12];
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[PTMarker alloc] init];
+		self.marker = [[YBMarker alloc] init];
 		
 		self.showMarker = NO;
 		
@@ -235,7 +235,7 @@
 	
 	attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
-	PTPointInfo *pointInfo = nil;
+	YBPointInfo *pointInfo = nil;
 	
 	for (int i = 0; i < maxStep; i++) {
 		int x = (i * step) * stepX;
@@ -308,7 +308,7 @@
 				bool highlight = false;
 				
 				if ([path containsPoint:mousePoint]) {
-					pointInfo = [[[PTPointInfo alloc] init] autorelease];
+					pointInfo = [[[YBPointInfo alloc] init] autorelease];
 					pointInfo.x = x + offsetX + (stepX / 2);
 					pointInfo.y = y + offsetY + 4;
 					

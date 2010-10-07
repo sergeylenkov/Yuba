@@ -1,14 +1,14 @@
 //
-//  PTBullet.m
+//  YBBullet.m
 //  Yuba
 //
 //  Created by Sergey Lenkov on 30.04.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTBullet.h"
+#import "YBBullet.h"
 
-@implementation PTBullet
+@implementation YBBullet
 
 @synthesize color;
 @synthesize borderColor;

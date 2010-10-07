@@ -1,16 +1,16 @@
 //
-//  PTMapView.h
+//  YBMapView.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 27.04.10.
 //  Copyright 2010 Positive Team. All rights reserved.
 //
 
-#import "PTMapView.h"
+#import "YBMapView.h"
 
 #define OFFSET 60
 
-@implementation PTMapView
+@implementation YBMapView
 
 @synthesize backgroundColor;
 @synthesize textColor;
@@ -178,7 +178,7 @@
 		[worldMap setObject:[NSArray arrayWithObjects:@"{6255,2914};{6263,2882};{6299,2874};{6299,2854};{6239,2782};{6279,2794};{6323,2794};{6383,2778};{6383,2750};{6431,2726};{6447,2730};{6459,2722};{6467,2690};{6487,2682};{6475,2662};{6499,2662};{6507,2654};{6503,2646};{6523,2626};{6511,2598};{6523,2586};{6555,2574};{6583,2578};{6607,2566};{6635,2582};{6639,2606};{6683,2618};{6631,2646};{6591,2638};{6579,2650};{6603,2706};{6619,2710};{6599,2726};{6599,2746};{6527,2834};{6499,2842};{6491,2834};{6467,2862};{6471,2874};{6483,2874};{6487,2898};{6495,2898};{6507,2934};{6431,2950};{6415,2950};{6387,2906}", nil] forKey:@"PK"];
 		[worldMap setObject:[NSArray arrayWithObjects:@"{5011,2018};{5123,1986};{5135,2002};{5235,1998};{5259,2018};{5267,2062};{5251,2078};{5259,2082};{5259,2098};{5271,2138};{5235,2170};{5239,2186};{5231,2186};{5135,2170};{5127,2158};{5031,2122};{5023,2066};{5011,2054};{5019,2046}", nil] forKey:@"PL"];
 		[worldMap setObject:[NSArray arrayWithObjects:@"{2875,3098};{2875,3110};{2911,3110};{2915,3098}", nil] forKey:@"PR"];
-		[worldMap setObject:[NSArray arrayWithObjects:@"{4407,2414};{4475,2430};{4447,2494};{4443,2566};{4403,2570};{4407,2526};{4391,2522};{4411,2442}", nil] forKey:@"PT"];
+		[worldMap setObject:[NSArray arrayWithObjects:@"{4407,2414};{4475,2430};{4447,2494};{4443,2566};{4403,2570};{4407,2526};{4391,2522};{4411,2442}", nil] forKey:@"YB"];
 		[worldMap setObject:[NSArray arrayWithObjects:@"{2995,4182};{3019,4110};{3087,4102};{3115,4122};{3115,4178};{3175,4182};{3187,4230};{3215,4230};{3207,4274};{3199,4306};{3175,4326};{3099,4322};{3127,4270};{3047,4226}", nil] forKey:@"PY"];
 		[worldMap setObject:[NSArray arrayWithObjects:@"{5987,2934};{5975,2926};{5975,2898};{5987,2886};{5995,2894};{5995,2922}", nil] forKey:@"QA"];
 		[worldMap setObject:[NSArray arrayWithObjects:@"{5239,2222};{5223,2230};{5195,2282};{5171,2282};{5235,2346};{5243,2358};{5315,2362};{5355,2350};{5391,2362};{5403,2326};{5415,2326};{5419,2310};{5387,2314};{5375,2282};{5383,2266};{5343,2210};{5295,2234}", nil] forKey:@"RO"];
@@ -247,7 +247,7 @@
 		
 		self.font = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[PTMarker alloc] init];
+		self.marker = [[YBMarker alloc] init];
 		
 		self.showMarker = NO;
 		self.showMarkerForZeroValue = NO;
@@ -306,7 +306,7 @@
 	[[formatter stringFromNumber:[NSNumber numberWithFloat:0.0]] drawInRect:NSMakeRect(10, 7, 10, 20) withAttributes:attsDict];
 	[[formatter stringFromNumber:[NSNumber numberWithFloat:max]] drawInRect:NSMakeRect(140, 7, 100, 20) withAttributes:attsDict];
 
-	PTPointInfo *pointInfo = nil;
+	YBPointInfo *pointInfo = nil;
 	
 	NSPoint startPoint;
 	NSPoint endPoint;
@@ -366,7 +366,7 @@
 			if (!showMarkerForZeroValue && [[values objectForKey:key] floatValue] == 0.0) {
 				pointInfo = nil;
 			} else {
-				pointInfo = [[[PTPointInfo alloc] init] autorelease];
+				pointInfo = [[[YBPointInfo alloc] init] autorelease];
 				pointInfo.x = mousePoint.x;
 				pointInfo.y = mousePoint.y;
 				pointInfo.title = [titles objectForKey:key];

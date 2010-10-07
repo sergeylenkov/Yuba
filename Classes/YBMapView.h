@@ -1,5 +1,5 @@
 //
-//  PTMapView.h
+//  YBMapView.h
 //  Yuba
 //
 //  Created by Sergey Lenkov on 27.04.10.
@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTPointInfo.h"
-#import "PTMarker.h"
+#import "YBPointInfo.h"
+#import "YBMarker.h"
 
-@interface PTMapView : NSView {
+@interface YBMapView : NSView {
 	NSMutableDictionary *worldMap;
 	NSMutableDictionary *values;
 	NSMutableDictionary *titles;
@@ -26,7 +26,7 @@
 	NSColor *highlightColor;
 	NSFont *font;
 	NSNumberFormatter *formatter;
-	PTMarker *marker;
+	YBMarker *marker;
 	BOOL showMarker;
 	BOOL showMarkerForZeroValue;
 	id delegate;
@@ -41,7 +41,7 @@
 @property (nonatomic, retain) NSColor *highlightColor;
 @property (nonatomic, retain) NSFont *font;
 @property (nonatomic, retain) NSNumberFormatter *formatter;
-@property (nonatomic, retain) PTMarker *marker;
+@property (nonatomic, retain) YBMarker *marker;
 @property (nonatomic, assign) BOOL showMarker;
 @property (nonatomic, assign) BOOL showMarkerForZeroValue;
 @property (nonatomic, retain) id delegate;
@@ -53,22 +53,22 @@
 
 @end
 
-@protocol PTMapViewDataSource
+@protocol YBMapViewDataSource
 
 @optional
 
-- (NSString *)mapView:(PTMapView *)map markerTitleForCountry:(NSString *)code;
+- (NSString *)mapView:(YBMapView *)map markerTitleForCountry:(NSString *)code;
 
 @required
 
-- (NSNumber *)mapView:(PTMapView *)map valueForCountry:(NSString *)code;
+- (NSNumber *)mapView:(YBMapView *)map valueForCountry:(NSString *)code;
 
 @end
 
-@protocol PTMapViewDelegate
+@protocol YBMapViewDelegate
 
 @optional
 
-- (void)mapView:(PTMapView *)map mouseMovedAboveCountry:(NSString *)code;
+- (void)mapView:(YBMapView *)map mouseMovedAboveCountry:(NSString *)code;
 
 @end
