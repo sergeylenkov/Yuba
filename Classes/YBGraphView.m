@@ -36,6 +36,7 @@
 @synthesize lineWidth;
 @synthesize drawBullet;
 @synthesize zeroAsMinValue;
+@synthesize fillGraph;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
@@ -74,6 +75,8 @@
 		
 		self.showMarker = NO;
 		self.zeroAsMinValue = YES;
+		
+		self.fillGraph = NO;
 		
 		enableMarker = YES;
 		
@@ -296,6 +299,7 @@
 	
 	for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
+		NSColor *color = [NSColor clearColor];
 		
 		if ([values count] == 1) {
 			int x = (self.frame.size.width - 120) / 2;
@@ -315,6 +319,8 @@
 
 			lastPoint = point;
 		} else {
+			NSMutableArray *points = [[NSMutableArray alloc] init];
+			
 			for (int j = 0; j < [values count] - 1; j++) {
 				int x = j * stepX;
 				int y = [[values objectAtIndex:j] intValue] * stepY;
@@ -343,19 +349,22 @@
 			
 				NSPoint endPoint = {x + offsetX, y + offsetY};
 							
-				[path moveToPoint:startPoint];		
+				[path moveToPoint:startPoint];
 				[path lineToPoint:endPoint];
-		
+
 				[path closePath];
-		
+				
 				if ([dataSource respondsToSelector:@selector(graphView: colorForGraph:)]) {
-					[[dataSource graphView:self colorForGraph:i] set];
+					color = [dataSource graphView:self colorForGraph:i];
 				} else {
-					[[self colorByIndex:i] set];
+					color = [self colorByIndex:i];
 				}
-			
+				
+				[color set];
 				[path stroke];
-			
+				
+				[points addObject:[NSValue valueWithPoint:startPoint]];
+				
 				if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
 					pointInfo = [[[YBPointInfo alloc] init] autorelease];
 								
@@ -376,6 +385,35 @@
 			
 				lastPoint = endPoint;
 			}
+			
+			if (fillGraph) {
+				NSPoint startPoint = [[points objectAtIndex:0] pointValue];
+				
+				[points addObject:[NSValue valueWithPoint:lastPoint]];
+				[points addObject:[NSValue valueWithPoint:NSMakePoint(lastPoint.x, offsetY)]];
+				[points addObject:[NSValue valueWithPoint:NSMakePoint(startPoint.x, offsetY)]];
+				[points addObject:[NSValue valueWithPoint:NSMakePoint(offsetX, offsetY)]];
+				[points addObject:[NSValue valueWithPoint:startPoint]];
+				
+				NSBezierPath *path = [NSBezierPath bezierPath];
+				[path setLineWidth:5.0];
+				
+				NSPoint point = [[points objectAtIndex:0] pointValue];
+				[path moveToPoint:point];
+				
+				for (int i = 1; i < [points count]; i++) {
+					point = [[points objectAtIndex:i] pointValue];
+					[path lineToPoint:point];
+				}
+				
+				[path closePath];
+
+				[[color colorWithAlphaComponent:0.3] set];
+				
+				[path fill];
+			}
+			
+			[points release];
 		}
 		
 		if (mousePoint.x > lastPoint.x - (stepX / 2) && mousePoint.x < lastPoint.x + (stepX / 2)) {

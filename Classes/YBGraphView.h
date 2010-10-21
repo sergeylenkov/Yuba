@@ -42,6 +42,9 @@
 	BOOL drawBullet;
 	YBBullet *bullet;
 	
+	BOOL fillGraph;
+	NSColor *fillColor;
+	
 	id delegate;
 	id dataSource;
 }
@@ -67,6 +70,7 @@
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) BOOL drawBullet;
 @property (nonatomic, assign) BOOL zeroAsMinValue;
+@property (nonatomic, assign) BOOL fillGraph;
 
 - (void)draw;
 - (void)drawLegendInRect:(NSRect)rect;
