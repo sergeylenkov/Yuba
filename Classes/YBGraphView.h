@@ -43,7 +43,6 @@
 	YBBullet *bullet;
 	
 	BOOL fillGraph;
-	NSColor *fillColor;
 	
 	id delegate;
 	id dataSource;

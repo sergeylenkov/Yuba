@@ -78,7 +78,7 @@
 		[title drawInRect:NSMakeRect((point.x - (rectWidth / 2)) + (offsetX / 2), point.y + (offsetY / 2) + 4, width, height) withAttributes:attsDict];
 	}
 	
-	if (type == 1) {
+	if (type == YBMarkerTypeRoundedRect) {
 		NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(point.x - (rectWidth / 2), point.y + 4, rectWidth, rectHeight) xRadius:5 yRadius:5];
 		[path setLineWidth:borderWidht];
 		
@@ -94,7 +94,7 @@
 		[title drawInRect:NSMakeRect((point.x - (rectWidth / 2)) + (offsetX / 2), point.y + (offsetY / 2) + 4, width, height) withAttributes:attsDict];
 	}
 	
-	if (type == 2) {
+	if (type == YBMarkerTypeRectWithArrow) {
 		NSBezierPath *path = [NSBezierPath bezierPath];
 		[path setLineWidth:borderWidht];
 		

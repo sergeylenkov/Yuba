@@ -323,7 +323,7 @@
 			
 			for (int j = 0; j < [values count] - 1; j++) {
 				int x = j * stepX;
-				int y = [[values objectAtIndex:j] intValue] * stepY;
+				int y = [[values objectAtIndex:j] floatValue] * stepY;
 
 				if (!zeroAsMinValue) {
 					y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
@@ -341,7 +341,7 @@
 				NSPoint startPoint = {x + offsetX, y + offsetY};
 						
 				x = (j + 1) * stepX;
-				y = [[values objectAtIndex:j + 1] intValue] * stepY;
+				y = [[values objectAtIndex:j + 1] floatValue] * stepY;
 		
 				if (!zeroAsMinValue) {
 					y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
@@ -386,7 +386,7 @@
 				lastPoint = endPoint;
 			}
 			
-			if (fillGraph) {
+			if (fillGraph && [values count] > 1) {
 				NSPoint startPoint = [[points objectAtIndex:0] pointValue];
 				
 				[points addObject:[NSValue valueWithPoint:lastPoint]];
@@ -396,19 +396,29 @@
 				[points addObject:[NSValue valueWithPoint:startPoint]];
 				
 				NSBezierPath *path = [NSBezierPath bezierPath];
-				[path setLineWidth:5.0];
+				[path setLineWidth:0.0];
 				
 				NSPoint point = [[points objectAtIndex:0] pointValue];
+                
+                if (point.y < offsetY) {
+                    point.y = offsetY;
+                }
+                
 				[path moveToPoint:point];
 				
 				for (int i = 1; i < [points count]; i++) {
 					point = [[points objectAtIndex:i] pointValue];
+                    
+                    if (point.y < offsetY) {
+                        point.y = offsetY;
+                    }
+                    
 					[path lineToPoint:point];
 				}
 				
 				[path closePath];
 
-				[[color colorWithAlphaComponent:0.3] set];
+				[[color colorWithAlphaComponent:0.2] set];
 				
 				[path fill];
 			}
