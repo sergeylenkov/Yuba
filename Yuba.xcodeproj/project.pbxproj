@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		8DC2EF570486A6940098B216 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7B1FEA5585E11CA2CBB /* Cocoa.framework */; };
-		A50EB220118C486000B638CC /* Yuba.h in Headers */ = {isa = PBXBuildFile; fileRef = A50EB21F118C486000B638CC /* Yuba.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A50EB351118C73F600B638CC /* YBChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50EB34F118C73F600B638CC /* YBChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A50EB352118C73F600B638CC /* YBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50EB350118C73F600B638CC /* YBChartView.m */; };
-		A5480180118B3D000052B82C /* YBBullet.h in Headers */ = {isa = PBXBuildFile; fileRef = A548017E118B3D000052B82C /* YBBullet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5480181118B3D000052B82C /* YBBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A548017F118B3D000052B82C /* YBBullet.m */; };
-		A5B822FA11883DDD001CAFCF /* YBMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F611883DDD001CAFCF /* YBMapView.m */; };
-		A5B822FC11883DDD001CAFCF /* YBPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B822F811883DDD001CAFCF /* YBPointInfo.m */; };
-		A5B823CF118855CD001CAFCF /* YBMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F511883DDD001CAFCF /* YBMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B823EB11885606001CAFCF /* YBPointInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B822F711883DDD001CAFCF /* YBPointInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B825311188616C001CAFCF /* YBMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8252F1188616C001CAFCF /* YBMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B825321188616C001CAFCF /* YBMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B825301188616C001CAFCF /* YBMarker.m */; };
-		A5B8268B11887FAD001CAFCF /* YBGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B8268911887FAD001CAFCF /* YBGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5B8268C11887FAD001CAFCF /* YBGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B8268A11887FAD001CAFCF /* YBGraphView.m */; };
-		A5E05CCE119BC6C500D7FDAB /* YBBarGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5E05CCF119BC6C500D7FDAB /* YBBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */; };
+		A572DB0612C7BB0200D894D7 /* YBBarGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DAF712C7BB0200D894D7 /* YBBarGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB0712C7BB0200D894D7 /* YBBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DAF812C7BB0200D894D7 /* YBBarGraphView.m */; };
+		A572DB0812C7BB0200D894D7 /* YBBullet.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DAF912C7BB0200D894D7 /* YBBullet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB0912C7BB0200D894D7 /* YBBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DAFA12C7BB0200D894D7 /* YBBullet.m */; };
+		A572DB0A12C7BB0200D894D7 /* YBChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DAFB12C7BB0200D894D7 /* YBChartView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB0B12C7BB0200D894D7 /* YBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DAFC12C7BB0200D894D7 /* YBChartView.m */; };
+		A572DB0C12C7BB0200D894D7 /* YBGraphView.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DAFD12C7BB0200D894D7 /* YBGraphView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB0D12C7BB0200D894D7 /* YBGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DAFE12C7BB0200D894D7 /* YBGraphView.m */; };
+		A572DB0E12C7BB0200D894D7 /* YBMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DAFF12C7BB0200D894D7 /* YBMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB0F12C7BB0200D894D7 /* YBMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DB0012C7BB0200D894D7 /* YBMapView.m */; };
+		A572DB1012C7BB0200D894D7 /* YBMarker.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DB0112C7BB0200D894D7 /* YBMarker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB1112C7BB0200D894D7 /* YBMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DB0212C7BB0200D894D7 /* YBMarker.m */; };
+		A572DB1212C7BB0200D894D7 /* YBPointInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DB0312C7BB0200D894D7 /* YBPointInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A572DB1312C7BB0200D894D7 /* YBPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A572DB0412C7BB0200D894D7 /* YBPointInfo.m */; };
+		A572DB1412C7BB0200D894D7 /* Yuba.h in Headers */ = {isa = PBXBuildFile; fileRef = A572DB0512C7BB0200D894D7 /* Yuba.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,21 +34,21 @@
 		32DBCF5E0370ADEE00C91783 /* Yuba_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yuba_Prefix.pch; sourceTree = "<group>"; };
 		8DC2EF5A0486A6940098B216 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* Yuba.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Yuba.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50EB21F118C486000B638CC /* Yuba.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Yuba.h; path = Classes/Yuba.h; sourceTree = "<group>"; };
-		A50EB34F118C73F600B638CC /* YBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBChartView.h; path = Classes/YBChartView.h; sourceTree = "<group>"; };
-		A50EB350118C73F600B638CC /* YBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBChartView.m; path = Classes/YBChartView.m; sourceTree = "<group>"; };
-		A548017E118B3D000052B82C /* YBBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBullet.h; path = Classes/YBBullet.h; sourceTree = "<group>"; };
-		A548017F118B3D000052B82C /* YBBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBullet.m; path = Classes/YBBullet.m; sourceTree = "<group>"; };
-		A5B822F511883DDD001CAFCF /* YBMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMapView.h; path = Classes/YBMapView.h; sourceTree = "<group>"; };
-		A5B822F611883DDD001CAFCF /* YBMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMapView.m; path = Classes/YBMapView.m; sourceTree = "<group>"; };
-		A5B822F711883DDD001CAFCF /* YBPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBPointInfo.h; path = Classes/YBPointInfo.h; sourceTree = "<group>"; };
-		A5B822F811883DDD001CAFCF /* YBPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBPointInfo.m; path = Classes/YBPointInfo.m; sourceTree = "<group>"; };
-		A5B8252F1188616C001CAFCF /* YBMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMarker.h; path = Classes/YBMarker.h; sourceTree = "<group>"; };
-		A5B825301188616C001CAFCF /* YBMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMarker.m; path = Classes/YBMarker.m; sourceTree = "<group>"; };
-		A5B8268911887FAD001CAFCF /* YBGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBGraphView.h; path = Classes/YBGraphView.h; sourceTree = "<group>"; };
-		A5B8268A11887FAD001CAFCF /* YBGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBGraphView.m; path = Classes/YBGraphView.m; sourceTree = "<group>"; };
-		A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBarGraphView.h; path = Classes/YBBarGraphView.h; sourceTree = "<group>"; };
-		A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBarGraphView.m; path = Classes/YBBarGraphView.m; sourceTree = "<group>"; };
+		A572DAF712C7BB0200D894D7 /* YBBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBarGraphView.h; path = Classes/YBBarGraphView.h; sourceTree = "<group>"; };
+		A572DAF812C7BB0200D894D7 /* YBBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBarGraphView.m; path = Classes/YBBarGraphView.m; sourceTree = "<group>"; };
+		A572DAF912C7BB0200D894D7 /* YBBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBullet.h; path = Classes/YBBullet.h; sourceTree = "<group>"; };
+		A572DAFA12C7BB0200D894D7 /* YBBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBullet.m; path = Classes/YBBullet.m; sourceTree = "<group>"; };
+		A572DAFB12C7BB0200D894D7 /* YBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBChartView.h; path = Classes/YBChartView.h; sourceTree = "<group>"; };
+		A572DAFC12C7BB0200D894D7 /* YBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBChartView.m; path = Classes/YBChartView.m; sourceTree = "<group>"; };
+		A572DAFD12C7BB0200D894D7 /* YBGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBGraphView.h; path = Classes/YBGraphView.h; sourceTree = "<group>"; };
+		A572DAFE12C7BB0200D894D7 /* YBGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBGraphView.m; path = Classes/YBGraphView.m; sourceTree = "<group>"; };
+		A572DAFF12C7BB0200D894D7 /* YBMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMapView.h; path = Classes/YBMapView.h; sourceTree = "<group>"; };
+		A572DB0012C7BB0200D894D7 /* YBMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMapView.m; path = Classes/YBMapView.m; sourceTree = "<group>"; };
+		A572DB0112C7BB0200D894D7 /* YBMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMarker.h; path = Classes/YBMarker.h; sourceTree = "<group>"; };
+		A572DB0212C7BB0200D894D7 /* YBMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMarker.m; path = Classes/YBMarker.m; sourceTree = "<group>"; };
+		A572DB0312C7BB0200D894D7 /* YBPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBPointInfo.h; path = Classes/YBPointInfo.h; sourceTree = "<group>"; };
+		A572DB0412C7BB0200D894D7 /* YBPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBPointInfo.m; path = Classes/YBPointInfo.m; sourceTree = "<group>"; };
+		A572DB0512C7BB0200D894D7 /* Yuba.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Yuba.h; path = Classes/Yuba.h; sourceTree = "<group>"; };
 		D2F7E79907B2D74100F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -105,21 +105,21 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A50EB21F118C486000B638CC /* Yuba.h */,
-				A5B8268911887FAD001CAFCF /* YBGraphView.h */,
-				A5B8268A11887FAD001CAFCF /* YBGraphView.m */,
-				A5E05CCC119BC6C500D7FDAB /* YBBarGraphView.h */,
-				A5E05CCD119BC6C500D7FDAB /* YBBarGraphView.m */,
-				A50EB34F118C73F600B638CC /* YBChartView.h */,
-				A50EB350118C73F600B638CC /* YBChartView.m */,
-				A5B822F511883DDD001CAFCF /* YBMapView.h */,
-				A5B822F611883DDD001CAFCF /* YBMapView.m */,
-				A5B822F711883DDD001CAFCF /* YBPointInfo.h */,
-				A5B822F811883DDD001CAFCF /* YBPointInfo.m */,
-				A5B8252F1188616C001CAFCF /* YBMarker.h */,
-				A5B825301188616C001CAFCF /* YBMarker.m */,
-				A548017E118B3D000052B82C /* YBBullet.h */,
-				A548017F118B3D000052B82C /* YBBullet.m */,
+				A572DAF712C7BB0200D894D7 /* YBBarGraphView.h */,
+				A572DAF812C7BB0200D894D7 /* YBBarGraphView.m */,
+				A572DAF912C7BB0200D894D7 /* YBBullet.h */,
+				A572DAFA12C7BB0200D894D7 /* YBBullet.m */,
+				A572DAFB12C7BB0200D894D7 /* YBChartView.h */,
+				A572DAFC12C7BB0200D894D7 /* YBChartView.m */,
+				A572DAFD12C7BB0200D894D7 /* YBGraphView.h */,
+				A572DAFE12C7BB0200D894D7 /* YBGraphView.m */,
+				A572DAFF12C7BB0200D894D7 /* YBMapView.h */,
+				A572DB0012C7BB0200D894D7 /* YBMapView.m */,
+				A572DB0112C7BB0200D894D7 /* YBMarker.h */,
+				A572DB0212C7BB0200D894D7 /* YBMarker.m */,
+				A572DB0312C7BB0200D894D7 /* YBPointInfo.h */,
+				A572DB0412C7BB0200D894D7 /* YBPointInfo.m */,
+				A572DB0512C7BB0200D894D7 /* Yuba.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -157,14 +157,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B823CF118855CD001CAFCF /* YBMapView.h in Headers */,
-				A5B823EB11885606001CAFCF /* YBPointInfo.h in Headers */,
-				A5B825311188616C001CAFCF /* YBMarker.h in Headers */,
-				A5B8268B11887FAD001CAFCF /* YBGraphView.h in Headers */,
-				A5480180118B3D000052B82C /* YBBullet.h in Headers */,
-				A50EB220118C486000B638CC /* Yuba.h in Headers */,
-				A50EB351118C73F600B638CC /* YBChartView.h in Headers */,
-				A5E05CCE119BC6C500D7FDAB /* YBBarGraphView.h in Headers */,
+				A572DB0612C7BB0200D894D7 /* YBBarGraphView.h in Headers */,
+				A572DB0812C7BB0200D894D7 /* YBBullet.h in Headers */,
+				A572DB0A12C7BB0200D894D7 /* YBChartView.h in Headers */,
+				A572DB0C12C7BB0200D894D7 /* YBGraphView.h in Headers */,
+				A572DB0E12C7BB0200D894D7 /* YBMapView.h in Headers */,
+				A572DB1012C7BB0200D894D7 /* YBMarker.h in Headers */,
+				A572DB1212C7BB0200D894D7 /* YBPointInfo.h in Headers */,
+				A572DB1412C7BB0200D894D7 /* Yuba.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,13 +231,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B822FA11883DDD001CAFCF /* YBMapView.m in Sources */,
-				A5B822FC11883DDD001CAFCF /* YBPointInfo.m in Sources */,
-				A5B825321188616C001CAFCF /* YBMarker.m in Sources */,
-				A5B8268C11887FAD001CAFCF /* YBGraphView.m in Sources */,
-				A5480181118B3D000052B82C /* YBBullet.m in Sources */,
-				A50EB352118C73F600B638CC /* YBChartView.m in Sources */,
-				A5E05CCF119BC6C500D7FDAB /* YBBarGraphView.m in Sources */,
+				A572DB0712C7BB0200D894D7 /* YBBarGraphView.m in Sources */,
+				A572DB0912C7BB0200D894D7 /* YBBullet.m in Sources */,
+				A572DB0B12C7BB0200D894D7 /* YBChartView.m in Sources */,
+				A572DB0D12C7BB0200D894D7 /* YBGraphView.m in Sources */,
+				A572DB0F12C7BB0200D894D7 /* YBMapView.m in Sources */,
+				A572DB1112C7BB0200D894D7 /* YBMarker.m in Sources */,
+				A572DB1312C7BB0200D894D7 /* YBPointInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,9 +270,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Yuba_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@loader_path/../Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				PRODUCT_NAME = Yuba;
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -289,7 +289,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Yuba_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "@loader_path/../Frameworks";
+				INSTALL_PATH = "$(HOME)/Library/Frameworks";
 				PRODUCT_NAME = Yuba;
 				WRAPPER_EXTENSION = framework;
 			};
@@ -306,7 +306,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
 		};
@@ -319,7 +318,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
-				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};

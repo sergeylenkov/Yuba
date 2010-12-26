@@ -347,8 +347,13 @@
 				
 			[[NSColor grayColor] set];
 			[path stroke];
-			
-			[[self colorForValue:[[values objectForKey:key] intValue] / percent] set];
+            
+			if ([[values objectForKey:key] intValue] == 0) {
+                [zeroColor set];
+            } else {
+                [[self colorForValue:[[values objectForKey:key] intValue] / percent] set];
+            }
+
 			[path fill];
 			
 			if ([path containsPoint:mousePoint]) {
