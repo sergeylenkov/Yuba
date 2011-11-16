@@ -1,6 +1,7 @@
 // !$*UTF8*$!
 {
 	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeArchitecturePreference = x86_64;
 		activeBuildConfigurationName = Debug;
 		activeTarget = 8DC2EF4F0486A6940098B216 /* Yuba */;
 		addToTargets = (
@@ -52,14 +53,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 315079401;
-			PBXWorkspaceStateSaveDate = 315079401;
+			PBXPerProjectTemplateStateSaveDate = 317564906;
+			PBXWorkspaceStateSaveDate = 317564906;
 		};
 		perUserProjectItems = {
-			A572DB6F12C7BBC800D894D7 /* PBXTextBookmark */ = A572DB6F12C7BBC800D894D7 /* PBXTextBookmark */;
+			A52BE29112EC1A95006B92DF /* PBXBookmark */ = A52BE29112EC1A95006B92DF /* PBXBookmark */;
+			A543981F12D4A4890019680E /* PlistBookmark */ = A543981F12D4A4890019680E /* PlistBookmark */;
 			A572DB7012C7BBC800D894D7 /* PBXTextBookmark */ = A572DB7012C7BBC800D894D7 /* PBXTextBookmark */;
-			A572DB7112C7BBC800D894D7 /* PBXTextBookmark */ = A572DB7112C7BBC800D894D7 /* PBXTextBookmark */;
-			A572DBE212C7BF2E00D894D7 /* PBXTextBookmark */ = A572DBE212C7BF2E00D894D7 /* PBXTextBookmark */;
+			A5A3B77B12CD11A100503208 /* PBXTextBookmark */ = A5A3B77B12CD11A100503208 /* PBXTextBookmark */;
 		};
 		sourceControlManager = A572DB1512C7BB0200D894D7 /* Source Control */;
 		userBuildSettings = {
@@ -67,6 +68,22 @@
 	};
 	8DC2EF4F0486A6940098B216 /* Yuba */ = {
 		activeExec = 0;
+	};
+	A52BE29112EC1A95006B92DF /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = A572DB0212C7BB0200D894D7 /* YBMarker.m */;
+	};
+	A543981F12D4A4890019680E /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8DC2EF5A0486A6940098B216 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+			CFBundleSignature,
+		);
+		name = /Users/Sergey/Projects/Yuba/Info.plist;
+		rLen = 0;
+		rLoc = 9223372036854775808;
 	};
 	A572DAF712C7BB0200D894D7 /* YBBarGraphView.h */ = {
 		uiCtxt = {
@@ -90,12 +107,28 @@
 			sepNavVisRange = "{0, 406}";
 		};
 	};
+	A572DAFE12C7BB0200D894D7 /* YBGraphView.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {873, 7969}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 440}";
+			sepNavWindowFrame = "{{301, 0}, {1405, 1178}}";
+		};
+	};
 	A572DB0012C7BB0200D894D7 /* YBMapView.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {24519, 8749}}";
 			sepNavSelRange = "{75954, 0}";
 			sepNavVisRange = "{74723, 2052}";
 			sepNavWindowFrame = "{{90, 119}, {1194, 1033}}";
+		};
+	};
+	A572DB0212C7BB0200D894D7 /* YBMarker.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {873, 2964}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{299, 877}";
+			sepNavWindowFrame = "{{98, 0}, {1562, 1178}}";
 		};
 	};
 	A572DB1512C7BB0200D894D7 /* Source Control */ = {
@@ -112,16 +145,6 @@
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
 	};
-	A572DB6F12C7BBC800D894D7 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = A572DAF712C7BB0200D894D7 /* YBBarGraphView.h */;
-		name = "YBBarGraphView.h: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 473;
-		vrLoc = 0;
-	};
 	A572DB7012C7BBC800D894D7 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = A572DAF912C7BB0200D894D7 /* YBBullet.h */;
@@ -132,17 +155,7 @@
 		vrLen = 406;
 		vrLoc = 0;
 	};
-	A572DB7112C7BBC800D894D7 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = A572DAF812C7BB0200D894D7 /* YBBarGraphView.m */;
-		name = "YBBarGraphView.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 449;
-		vrLoc = 0;
-	};
-	A572DBE212C7BF2E00D894D7 /* PBXTextBookmark */ = {
+	A5A3B77B12CD11A100503208 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = A572DAF812C7BB0200D894D7 /* YBBarGraphView.m */;
 		name = "YBBarGraphView.m: 1";

@@ -26,7 +26,9 @@
 @synthesize dataSource;
 
 - (id)initWithFrame:(NSRect)frame {
-    if (self = [super initWithFrame:frame]) {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
         worldMap = [[NSMutableDictionary alloc] init];
 		
 		[worldMap setObject:[NSArray arrayWithObjects:@"{4687,2398};{4679,2402};{4679,2398}", nil] forKey:@"AD"];
@@ -231,7 +233,7 @@
 		hideMarker = NO;
 		enableMarker = YES;
 		
-		self.formatter = [[NSNumberFormatter alloc] init];
+		formatter = [[NSNumberFormatter alloc] init];
 		
 		[formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 		[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -247,10 +249,10 @@
 		
 		self.font = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[YBMarker alloc] init];
+		marker = [[YBMarker alloc] init];
 		
-		self.showMarker = NO;
-		self.showMarkerForZeroValue = NO;
+		showMarker = NO;
+		showMarkerForZeroValue = NO;
 				
 		NSTrackingAreaOptions trackingOptions =	NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
 		
@@ -285,6 +287,10 @@
 	float ratioX = (rect.size.width - OFFSET * 2) / 9635;
 	float ratioY = rect.size.height / 8000;
 
+    if (ratioX > ratioY) {
+        ratioX = ratioY;
+    }
+    
 	float max = 0.0;
 
 	for (id key in values) {		
@@ -300,7 +306,7 @@
 		
 	NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
-	NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[self colorForValue:0.0] endingColor:[self colorForValue:100.0]];
+	NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[self colorForValue:1.0] endingColor:[self colorForValue:100.0]];
 	[gradient drawInRect:NSMakeRect(30, 10, 100, 20) angle:0];
 
 	[[formatter stringFromNumber:[NSNumber numberWithFloat:0.0]] drawInRect:NSMakeRect(10, 7, 10, 20) withAttributes:attsDict];
@@ -399,6 +405,10 @@
 	float ratioX = (rect.size.width - OFFSET * 2) / 9635;
 	float ratioY = rect.size.height / 8000;
 	
+    if (ratioX > ratioY) {
+        ratioX = ratioY;
+    }
+    
 	NSPoint startPoint;
 	NSPoint endPoint;
 
@@ -445,20 +455,20 @@
 		return zeroColor;
 	}
 	
-	float hue = [maxColor hueComponent];
-	float saturation = (value / 70.0);
+	//float hue = [maxColor hueComponent];
+	//float saturation = (value / 70.0);
 	float brightness = 1.0 - (value / 50.0);
-	float alfa = 1.0;
+	//float alfa = 1.0;
 	
-	if (saturation < 0.1) {
+	/*if (saturation < 0.1) {
 		saturation = 0.1;
-	}
+	}*/
 	
 	if (brightness < 0.2) {
 		brightness = 0.2;
 	}
 
-	return [NSColor colorWithCalibratedHue:hue saturation:saturation brightness:brightness alpha:alfa];
+	return [maxColor highlightWithLevel:brightness]; //[NSColor colorWithCalibratedHue:hue saturation:100.0 brightness:100.0 alpha:1.0];
 }
 
 - (void)mouseEntered:(NSEvent *)event {

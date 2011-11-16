@@ -23,7 +23,8 @@
 	NSFont *infoFont;
 	NSFont *legendFont;
 	NSColor *backgroundColor;
-	NSColor *textColor;	
+	NSColor *textColor;
+	BOOL isGradient;
 }
 
 @property (nonatomic, retain) NSMutableArray *series;
@@ -42,6 +43,7 @@
 @property (nonatomic, retain) NSFont *legendFont;
 @property (nonatomic, retain) NSColor *backgroundColor;
 @property (nonatomic, retain) NSColor *textColor;
+@property (nonatomic, assign) BOOL isGradient;
 
 - (void)draw;
 

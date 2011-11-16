@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 enum {
-	PTBulletTypeCircle = 0,
-	PTMarkerTypeSquare = 1
+	YBBulletTypeCircle = 0,
+	YBMarkerTypeSquare = 1
 };
 
 @interface YBBullet : NSObject {

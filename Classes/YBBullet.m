@@ -17,7 +17,9 @@
 @synthesize type;
 
 - (id)init {
-	if (self = [super init]) {		
+    self = [super init];
+    
+	if (self) {		
 		self.color = [NSColor blackColor];
 		self.borderColor = [NSColor whiteColor];
 		
@@ -30,7 +32,7 @@
 }
 
 - (void)drawAtPoint:(NSPoint)point {
-	if (type == PTBulletTypeCircle) {
+	if (type == YBBulletTypeCircle) {
 		NSBezierPath *path = [NSBezierPath bezierPathWithOvalInRect:NSMakeRect(point.x - (size / 2), point.y - (size / 2), size, size)];
 		
 		[path setLineWidth:borderWidht];
@@ -43,7 +45,7 @@
 		[path fill];
 	}
 	
-	if (type == PTMarkerTypeSquare) {
+	if (type == YBMarkerTypeSquare) {
 		NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(point.x - (size / 2), point.y - (size / 2), size, size)];
 		
 		[path setLineWidth:borderWidht];

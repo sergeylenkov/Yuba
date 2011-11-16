@@ -2,7 +2,7 @@
 
 #define OFFSET 20
 #define OFFSET_WITH_INFO 30
-#define OFFSET_LEGENT 140
+#define OFFSET_LEGENT 60
 
 @implementation YBChartView
 
@@ -22,10 +22,13 @@
 @synthesize legendFont;
 @synthesize backgroundColor;
 @synthesize textColor;
+@synthesize isGradient;
 
 - (id)initWithFrame:(NSRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        self.formatter = [[NSNumberFormatter alloc] init];
+    self = [super initWithFrame:frame];
+    
+    if (self) {
+        formatter = [[NSNumberFormatter alloc] init];
 		
 		[formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 		[formatter setNumberStyle:NSNumberFormatterDecimalStyle];	      
@@ -45,10 +48,11 @@
 		self.font = [NSFont boldSystemFontOfSize:11];
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		self.infoFont = [NSFont systemFontOfSize:11];
+		self.isGradient = NO;
+        
+		marker = [[YBMarker alloc] init];
 		
-		self.marker = [[YBMarker alloc] init];
-		
-		self.showMarker = NO;
+		showMarker = NO;
 		hideMarker = NO;
 		enableMarker = YES;
 		
@@ -95,14 +99,6 @@
 		
 		return;
 	}
-
-	int offset = 0.0;
-	
-	if (drawInfo) {
-		offset = OFFSET_WITH_INFO;
-	} else {
-		offset = OFFSET;
-	}
 	
 	float max = 0.0;
 	
@@ -118,7 +114,7 @@
 	float startAngle = 0.0;
 	
 	if (percent == 0.0) {
-		percent == 1;
+		percent = 1.0;
 	}
 	
 	NSMutableArray *chartSeries = [[NSMutableArray alloc] init];
@@ -152,8 +148,8 @@
 		[chartValues addObject:[NSNumber numberWithFloat:other]];
 	}	
 	
-	float chartSpaceHeight = rect.size.height;
-	float chartSpaceWidth = rect.size.width;
+	float chartSpaceHeight;// = rect.size.height;
+	float chartSpaceWidth;// = rect.size.width;
 	
 	if (drawLegend) {
 		chartSpaceWidth = rect.size.width - OFFSET_LEGENT;
@@ -193,20 +189,20 @@
 	
 	YBPointInfo *pointInfo = nil;
 	
+    float radius = chartSpaceHeight / 2;
+    
+    if (chartSpaceHeight > chartSpaceWidth) {
+        radius = chartSpaceWidth / 2;
+    }
+    
+    radius = radius - OFFSET * 2;
+    
 	for (int i = 0; i < [chartValues count]; i++) {
 		float percents = [[chartValues objectAtIndex:i] floatValue] / percent;
 		float endAngle = startAngle + percents * 3.6;
 
 		NSBezierPath *path = [NSBezierPath bezierPath];
 		[path setLineWidth:0.1];
-		
-		float radius = chartSpaceHeight / 2;
-		
-		if (chartSpaceHeight > chartSpaceWidth) {
-			radius = chartSpaceWidth / 2;
-		}
-		
-		radius = radius - OFFSET * 2;
 
 		[path moveToPoint:center];
 		[path appendBezierPathWithArcWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle];
@@ -219,10 +215,10 @@
 			}			
 		} else {
 			[[YBChartView colorByIndex:-1] set];
-		}
-		
+		}		
+        
 		[path fill];
-		
+        
 		if ([path containsPoint:mousePoint]) {
 			pointInfo = [[[YBPointInfo alloc] init] autorelease];
 			pointInfo.x = mousePoint.x;
@@ -235,9 +231,9 @@
 			}
 			
 			if (i < maxChartsCount) {
-				marker.backgroundColor = [YBChartView markerColorByIndex:i];
+				//marker.backgroundColor = [YBChartView markerColorByIndex:i];
 			} else {
-				marker.backgroundColor = [YBChartView markerColorByIndex:-1];
+				//marker.backgroundColor = [YBChartView markerColorByIndex:-1];
 			}
 		}
 		
@@ -268,11 +264,11 @@
 		
 		//NSString *title = [chartSeries objectAtIndex:i];		
 
-		radius = chartSpaceHeight / 2;
+		/*radius = chartSpaceHeight / 2;
 		
 		if (chartSpaceHeight > chartSpaceWidth) {
 			radius = chartSpaceWidth / 2;
-		}
+		}*/
 
 		fromPoint.x = fromPoint.x + center.x;
 		fromPoint.y = fromPoint.y + center.y;
@@ -327,6 +323,19 @@
 		startAngle = startAngle + percents * 3.6;
 	}
 	
+    if (isGradient) {
+        NSColor *color = [NSColor colorWithDeviceRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.15];
+        
+        NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:color endingColor:[color highlightWithLevel:0.6]];
+        
+        NSBezierPath *path = [NSBezierPath bezierPath];
+        [path moveToPoint:center];
+        [path appendBezierPathWithArcWithCenter:center radius:radius startAngle:0.0 endAngle:360.0];
+        [gradient drawInBezierPath:path angle:90.0];
+        
+        [gradient release];
+    }    
+    
 	// draw marker
 	
 	if (showMarker && !hideMarker && enableMarker && pointInfo != nil) {
@@ -342,12 +351,25 @@
 	if (drawLegend) {
 		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 		[paragraphStyle setAlignment:NSLeftTextAlignment];
-		
+		[paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+        
 		int n = 0;
-		
+        int width = 0;
+        
+        for (int i = 0; i < [chartSeries count]; i++) {
+            NSString *legend = [chartSeries objectAtIndex:i];
+            
+            NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:legendFont, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+            NSSize size = [legend sizeWithAttributes:attsDict];
+            
+            if (size.width > width) {
+                width = size.width;
+            }
+        }
+        
 		for (int i = 0; i < [chartValues count]; i++) {
 			if ([[chartValues objectAtIndex:i] floatValue] > 0) {
-				int top = rect.size.height - 80;
+				int top = rect.size.height - OFFSET_LEGENT;
 				
 				NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName,  paragraphStyle, NSParagraphStyleAttributeName, nil];
 				
@@ -357,8 +379,8 @@
 					[[YBChartView colorByIndex:-1] set];
 				}
 				
-				NSRectFill(NSMakeRect(rect.size.width - (OFFSET_LEGENT + 20), top - n * 30, 10, 10));				
-				[[chartSeries objectAtIndex:i] drawInRect:NSMakeRect(rect.size.width - OFFSET_LEGENT, top - n * 30, OFFSET_LEGENT - 10, 16) withAttributes:attsDict];
+				NSRectFill(NSMakeRect(rect.size.width - width - OFFSET_LEGENT - 20, top - n * 30, 10, 10));				
+				[[chartSeries objectAtIndex:i] drawInRect:NSMakeRect(rect.size.width - width - OFFSET_LEGENT, (top - n * 30) - 4, width, 16) withAttributes:attsDict];
 		 
 				n = n + 1;
 			}
@@ -389,19 +411,19 @@
 	
 	switch (index) {
 		case 0:
-			color = [NSColor colorWithDeviceRed:5/255.0 green:141/255.0 blue:199/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:1/255.0 green:165/255.0 blue:218/255.0 alpha:1.0];
 			break;
-		case 1:	
-			color = [NSColor colorWithDeviceRed:80/255.0 green:180/255.0 blue:50/255.0 alpha:1.0];
+		case 1:
+			color = [NSColor colorWithDeviceRed:122/255.0 green:184/255.0 blue:37/255.0 alpha:1.0];
 			break;		
 		case 2:
-			color = [NSColor colorWithDeviceRed:255/255.0 green:102/255.0 blue:0/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:202/255.0 green:85/255.0 blue:43/255.0 alpha:1.0];
 			break;
 		case 3:
-			color = [NSColor colorWithDeviceRed:255/255.0 green:158/255.0 blue:1/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:241/255.0 green:182/255.0 blue:49/255.0 alpha:1.0];
 			break;
 		case 4:
-			color = [NSColor colorWithDeviceRed:252/255.0 green:210/255.0 blue:2/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:129/255.0 green:52/255.0 blue:79/255.0 alpha:1.0];
 			break;
 		case 5:
 			color = [NSColor colorWithDeviceRed:248/255.0 green:255/255.0 blue:1/255.0 alpha:1.0];

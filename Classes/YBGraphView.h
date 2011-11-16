@@ -23,15 +23,17 @@
 	BOOL drawInfo;
 	NSString *info;
 	BOOL drawLegend;
-	BOOL zeroAsMinValue;
-	
+	BOOL useMinValue;
+    float minValue;
+	BOOL isRevert;
+    
 	NSTrackingArea *trackingArea; 
 	NSPoint mousePoint;
 	
 	BOOL showMarker;
 	BOOL hideMarker;
 	BOOL enableMarker;
-	
+	BOOL showMarkerNearPoint;
 	YBMarker *marker;
 	NSFont *font;
 	NSFont *infoFont;
@@ -40,10 +42,12 @@
 	NSColor *textColor;	
 	CGFloat lineWidth;
 	BOOL drawBullet;
-	YBBullet *bullet;
-	
+	YBBullet *bullet;	
 	BOOL fillGraph;
-	
+	BOOL drawBottomMarker;
+    NSInteger gridYCount;
+    NSInteger roundGridYTo;
+    BOOL isRoundGridY;
 	id delegate;
 	id dataSource;
 }
@@ -68,13 +72,20 @@
 @property (nonatomic, retain) NSColor *textColor;
 @property (nonatomic, assign) CGFloat lineWidth;
 @property (nonatomic, assign) BOOL drawBullet;
-@property (nonatomic, assign) BOOL zeroAsMinValue;
+@property (nonatomic, assign) BOOL useMinValue;
+@property (nonatomic, assign) float minValue;
+@property (nonatomic, assign) BOOL isRevert;
 @property (nonatomic, assign) BOOL fillGraph;
+@property (nonatomic, assign) BOOL drawBottomMarker;
+@property (nonatomic, assign) NSInteger gridYCount;
+@property (nonatomic, assign) NSInteger roundGridYTo;
+@property (nonatomic, assign) BOOL isRoundGridY;
+@property (nonatomic, assign) BOOL showMarkerNearPoint;
 
 - (void)draw;
 - (void)drawLegendInRect:(NSRect)rect;
 
-- (NSColor *)colorByIndex:(NSInteger)index;
++ (NSColor *)colorByIndex:(NSInteger)index;
 
 @end
 

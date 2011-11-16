@@ -176,14 +176,7 @@
 	<key>Extension</key>
 	<string>mode1v3</string>
 	<key>FavBarConfig</key>
-	<dict>
-		<key>PBXProjectModuleGUID</key>
-		<string>A572DB7512C7BBC800D894D7</string>
-		<key>XCBarModuleItemNames</key>
-		<dict/>
-		<key>XCBarModuleItems</key>
-		<array/>
-	</dict>
+	<dict/>
 	<key>FirstTimeWindowDisplayed</key>
 	<false/>
 	<key>Identifier</key>
@@ -228,8 +221,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,13 +263,12 @@
 								<string>034768DFFF38A50411DB9C8B</string>
 								<string>8DC2EF5B0486A6940098B216</string>
 								<string>1C37FBAC04509CD000000102</string>
-								<string>A572DB6D12C7BBC800D894D7</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
+									<integer>13</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -303,7 +293,7 @@
 							<real>186</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>348 215 1142 790 0 0 1920 1178 </string>
+						<string>228 253 1142 790 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -319,7 +309,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>YBBarGraphView.m</string>
+								<string></string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,16 +317,13 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>YBBarGraphView.m</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>A572DBE212C7BF2E00D894D7</string>
+										<string></string>
 										<key>history</key>
 										<array>
-											<string>A572DB6F12C7BBC800D894D7</string>
 											<string>A572DB7012C7BBC800D894D7</string>
-											<string>A572DB7112C7BBC800D894D7</string>
+											<string>A5A3B77B12CD11A100503208</string>
+											<string>A543981F12D4A4890019680E</string>
+											<string>A52BE29112EC1A95006B92DF</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -350,7 +337,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {934, 340}}</string>
 								<key>RubberWindowFrame</key>
-								<string>348 215 1142 790 0 0 1920 1178 </string>
+								<string>228 253 1142 790 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -370,7 +357,7 @@
 								<key>Frame</key>
 								<string>{{0, 345}, {934, 425}}</string>
 								<key>RubberWindowFrame</key>
-								<string>348 215 1142 790 0 0 1920 1178 </string>
+								<string>228 253 1142 790 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -394,9 +381,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>A572DB7312C7BBC800D894D7</string>
+				<string>A5AE47B912F09AB8001D9FB4</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>A572DB7412C7BBC800D894D7</string>
+				<string>A5AE47BA12F09AB8001D9FB4</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -511,7 +498,7 @@
 	<key>PerspectivesBarVisible</key>
 	<false/>
 	<key>PinnedNavigatorIdentifier</key>
-	<string>A572DBC112C7BD5000D894D7</string>
+	<string>A52BE28C12EC19EA006B92DF</string>
 	<key>ShelfIsVisible</key>
 	<false/>
 	<key>SourceDescription</key>
@@ -536,12 +523,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A572DBC112C7BD5000D894D7</string>
-		<string>A5B822D811883C63001CAFCF</string>
 		<string>/Users/Sergey/Projects/Yuba/Yuba.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>348 215 1142 790 0 0 1920 1178 </string>
+	<string>228 253 1142 790 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -618,7 +603,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>A5B822D811883C63001CAFCF</string>
-				<string>A572DB7612C7BBC800D894D7</string>
+				<string>A54397A212D45BD30019680E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

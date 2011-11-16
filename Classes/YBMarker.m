@@ -20,7 +20,9 @@
 @synthesize shadow;
 
 - (id)init {
-	if (self = [super init]) {
+    self = [super init];
+    
+	if (self) {
 		NSFontManager *fontManager = [NSFontManager sharedFontManager];
 		self.font = [fontManager fontWithFamily:@"Helvetica Neue" traits:NSBoldFontMask weight:0 size:10];
 		

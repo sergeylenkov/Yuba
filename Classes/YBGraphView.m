@@ -35,14 +35,21 @@
 @synthesize textColor;
 @synthesize lineWidth;
 @synthesize drawBullet;
-@synthesize zeroAsMinValue;
+@synthesize useMinValue;
+@synthesize minValue;
 @synthesize fillGraph;
+@synthesize isRevert;
+@synthesize drawBottomMarker;
+@synthesize gridYCount;
+@synthesize roundGridYTo;
+@synthesize isRoundGridY;
+@synthesize showMarkerNearPoint;
 
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
 	
     if (self) {
-		self.formatter = [[NSNumberFormatter alloc] init];
+		formatter = [[NSNumberFormatter alloc] init];
 		
 		[formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 		[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -70,14 +77,20 @@
 		self.infoFont = [NSFont fontWithName:@"Helvetica Neue" size:12];
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[YBMarker alloc] init];
-		self.bullet = [[YBBullet alloc] init];
+		marker = [[YBMarker alloc] init];
+		bullet = [[YBBullet alloc] init];
 		
-		self.showMarker = NO;
-		self.zeroAsMinValue = YES;
-		
-		self.fillGraph = NO;
-		
+		showMarker = NO;
+		useMinValue = NO;
+        minValue = 0.0;
+		isRevert = NO;
+		fillGraph = NO;
+		drawBottomMarker = NO;
+        gridYCount = 5;
+        roundGridYTo = 10;
+        isRoundGridY = YES;
+        showMarkerNearPoint = NO;
+        
 		enableMarker = YES;
 		
 		NSTrackingAreaOptions trackingOptions =	NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
@@ -94,7 +107,8 @@
 	[graphs removeAllObjects];
 	[legends removeAllObjects];
 	
-	series = [[NSMutableArray arrayWithArray:[dataSource seriesForGraphView:self]] retain];
+	[series addObjectsFromArray:[dataSource seriesForGraphView:self]];
+    
 	int count = [dataSource numberOfGraphsInGraphView:self];
 	
 	for (int i = 0; i < count; i++) {
@@ -142,16 +156,20 @@
 	for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
 
-		if (!zeroAsMinValue) {
+		if (!useMinValue) {
 			minY = [[values lastObject] floatValue];
 		}
 		
 		for (int j = 0; j < [values count]; j++) {
+            if ([[values objectAtIndex:j] isKindOfClass:[NSNull class]]) {
+                continue;
+            }
+            
 			if ([[values objectAtIndex:j] floatValue] > maxY) {
 				maxY = [[values objectAtIndex:j] floatValue];
 			}
 			
-			if (!zeroAsMinValue) {
+			if (!useMinValue) {
 				if ([[values objectAtIndex:j] floatValue] < minY) {
 					minY = [[values objectAtIndex:j] floatValue];
 				}
@@ -159,28 +177,18 @@
 		}
 	}
 	
-	if (zeroAsMinValue) {
-		if (maxY < 100) {
-			maxY = ceil(maxY / 10) * 10;
-		} 
-	
-		if (maxY > 100 && maxY < 1000) {
-			maxY = ceil(maxY / 100) * 100;
-		} 
-
-		if (maxY > 1000 && maxY < 10000) {
-			maxY = ceil(maxY / 1000) * 1000;
-		}
-	
-		if (maxY > 10000 && maxY < 100000) {
-			maxY = ceil(maxY / 10000) * 10000;
-		}
+    if (useMinValue) {
+        minY = minValue;
+    }
+    
+    if (isRoundGridY) {
+        maxY = ceil(maxY / roundGridYTo) * roundGridYTo;
 	}
-	
-	float step = (maxY - minY) / 5;
+    
+	float step = (maxY - minY) / gridYCount;
 	float stepY = (rect.size.height - (offsetY * 2)) / maxY;
 	
-	if (!zeroAsMinValue) {
+	if (!useMinValue) {
 		stepY = (rect.size.height - (offsetY * 2)) / (maxY - minY);
 	}
 	
@@ -189,13 +197,10 @@
 	
 	NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
-	for (int i = 0; i < 6; i++) {		
+	for (int i = 0; i <= gridYCount; i++) {		
 		int y = (i * step) * stepY;
-		float value = i * step;
+		float value = i * step + minY;
 		
-		if (!zeroAsMinValue) {
-			value = i * step + minY;
-		}
 		
 		if (drawGridY) {
 			NSBezierPath *path = [NSBezierPath bezierPath];
@@ -205,9 +210,18 @@
 			[path setLineDash:dash count:2 phase:0.0];
 			[path setLineWidth:0.1];
 		
-			NSPoint startPoint = {offsetX, y + offsetY};
-			NSPoint endPoint = {rect.size.width - offsetX, y + offsetY};
+			NSPoint startPoint = NSMakePoint(offsetX, y + offsetY);
+            
+            if (isRevert) {
+                startPoint = NSMakePoint(offsetX, rect.size.height - (y + offsetY));
+            }
+            
+			NSPoint endPoint = NSMakePoint(rect.size.width - offsetX, y + offsetY);
 			
+            if (isRevert) {
+                endPoint = NSMakePoint(rect.size.width - offsetX, rect.size.height - (y + offsetY));
+            }
+            
 			[path moveToPoint:startPoint];		
 			[path lineToPoint:endPoint];
 					
@@ -217,7 +231,11 @@
 			[path stroke];
 		}
 		
-		if (i > 0 && drawAxesY) {
+        if (isRevert) {
+            y = rect.size.height - (y + offsetY + 30);
+        }
+        
+		if (drawAxesY) {
 			NSString *numberString = [formatter stringFromNumber:[NSNumber numberWithFloat:value]];
 			[numberString drawInRect:NSMakeRect(0, y + 20, 50, 20) withAttributes:attsDict];
 		}
@@ -251,70 +269,143 @@
 	
 	attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
-	for (int i = 0; i < maxStep; i++) {
-		int x = (i * step) * stepX;
-		
-		if (x > self.frame.size.width - (offsetX * 2)) {
-			x = self.frame.size.width - (offsetX * 2);
-		}
-		
-		int index = i * step;
-		
-		if (index >= [series count]) {
-			index = [series count] - 1;
-		}
-
-		if (drawGridX) {
+    if ([series count] > 1) {
+        if (drawGridX) {
 			NSBezierPath *path = [NSBezierPath bezierPath];
-		
+            
 			CGFloat dash[] = {6.0, 6.0};
 			
 			[path setLineDash:dash count:2 phase:0.0];
 			[path setLineWidth:0.1];
-		
-			NSPoint startPoint = {x + offsetX, offsetY};
-			NSPoint endPoint = {x + offsetX, rect.size.height - offsetY};
-		
+            
+			NSPoint startPoint = NSMakePoint(offsetX, offsetY);
+			NSPoint endPoint = NSMakePoint(offsetX, rect.size.height - offsetY);
+            
 			[path moveToPoint:startPoint];		
 			[path lineToPoint:endPoint];
-		
+            
+			[path closePath];
+			
+			[[NSColor colorWithDeviceRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] set];
+			[path stroke];
+            
+            path = [NSBezierPath bezierPath];
+			
+			[path setLineDash:dash count:2 phase:0.0];
+			[path setLineWidth:0.1];
+            
+            int x = self.frame.size.width - (offsetX * 2);
+            
+            startPoint = NSMakePoint(x + offsetX, offsetY);
+			endPoint = NSMakePoint(x + offsetX, rect.size.height - offsetY);
+            
+			[path moveToPoint:startPoint];		
+			[path lineToPoint:endPoint];
+            
 			[path closePath];
 			
 			[[NSColor colorWithDeviceRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] set];
 			[path stroke];
 		}
-		
-		if (drawAxesX) {
-			NSString *dateString = [series objectAtIndex:index];
-			[dateString drawInRect:NSMakeRect(x, 0, 120, 20) withAttributes:attsDict];
+        
+        if (drawAxesX) {
+			[[series objectAtIndex:0] drawInRect:NSMakeRect(0, 0, 120, 20) withAttributes:attsDict];
+			[[series lastObject] drawInRect:NSMakeRect(self.frame.size.width - (offsetX * 2), 0, 120, 20) withAttributes:attsDict];
 		}
-	}
+        
+        for (int i = 1; i < maxStep - 1; i++) {
+            int x = (i * step) * stepX;
+            
+            if (x > self.frame.size.width - (offsetX * 2)) {
+                x = self.frame.size.width - (offsetX * 2);
+            }
+            
+            int index = i * step;
+            
+            if (index >= [series count]) {
+                index = [series count] - 1;
+            }
+            
+            if (drawGridX) {
+                NSBezierPath *path = [NSBezierPath bezierPath];
+                
+                CGFloat dash[] = {6.0, 6.0};
+                
+                [path setLineDash:dash count:2 phase:0.0];
+                [path setLineWidth:0.1];
+                
+                NSPoint startPoint = {x + offsetX, offsetY};
+                NSPoint endPoint = {x + offsetX, rect.size.height - offsetY};
+                
+                [path moveToPoint:startPoint];		
+                [path lineToPoint:endPoint];
+                
+                [path closePath];
+                
+                [[NSColor colorWithDeviceRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] set];
+                [path stroke];
+            }
+            
+            if (drawAxesX) {
+                [[series objectAtIndex:index] drawInRect:NSMakeRect(x, 0, 120, 20) withAttributes:attsDict];
+            }
+        }
+    } else {
+        if (drawGridX) {
+            NSBezierPath *path = [NSBezierPath bezierPath];
+            
+            CGFloat dash[] = {6.0, 6.0};
+            
+            [path setLineDash:dash count:2 phase:0.0];
+            [path setLineWidth:0.1];
+            
+            int x = (self.frame.size.width - (offsetX * 2)) / 2;
+            
+            NSPoint startPoint = {x + offsetX, offsetY};
+            NSPoint endPoint = {x + offsetX, rect.size.height - offsetY};
+            
+            [path moveToPoint:startPoint];		
+            [path lineToPoint:endPoint];
+            
+            [path closePath];
+            
+            [[NSColor colorWithDeviceRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0] set];
+            [path stroke];
+        }
+        
+        if (drawAxesX) {
+            int x = (self.frame.size.width - (offsetX * 2)) / 2;
+            [[series objectAtIndex:0] drawInRect:NSMakeRect(x, 0, 120, 20) withAttributes:attsDict];
+        }
+    }
 	
 	[paragraphStyle release];
 	
 	stepX = (self.frame.size.width - 120) / ([series count] - 1);
+	    
+    NSPoint lastPoint;
 	
-	YBPointInfo *pointInfo = nil;
-	NSPoint lastPoint;
-	
-	for (int i = 0; i < [graphs count]; i++) {
+    NSMutableArray *markers = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
 		NSColor *color = [NSColor clearColor];
 		
 		if ([values count] == 1) {
-			int x = (self.frame.size.width - 120) / 2;
+			int x = (self.frame.size.width) / 2;
 			int y = [[values objectAtIndex:0] intValue] * stepY;
 			
-			if (!zeroAsMinValue) {
+			if (!useMinValue) {
 				y = ([[values objectAtIndex:0] floatValue] - minY) * stepY;
 			}
 			
-			NSPoint point;
-			
-			point.x = x;
-			point.y = y;
-			
-			bullet.color = [self colorByIndex:i];
+			NSPoint point = NSMakePoint(x, y);
+						
+            if (isRevert) {
+                point = NSMakePoint(x,  rect.size.height - (y + offsetY));
+            }
+            
+			bullet.color = [YBGraphView colorByIndex:i];
 			[bullet drawAtPoint:point];
 
 			lastPoint = point;
@@ -322,10 +413,14 @@
 			NSMutableArray *points = [[NSMutableArray alloc] init];
 			
 			for (int j = 0; j < [values count] - 1; j++) {
+                if ([[values objectAtIndex:j] isKindOfClass:[NSNull class]]) {
+                    continue;
+                }
+                     
 				int x = j * stepX;
 				int y = [[values objectAtIndex:j] floatValue] * stepY;
 
-				if (!zeroAsMinValue) {
+				if (!useMinValue) {
 					y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
 				}
 			
@@ -338,17 +433,66 @@
 		
 				[path setLineWidth:lineWidth];
 		
-				NSPoint startPoint = {x + offsetX, y + offsetY};
-						
+                NSPoint startPoint = NSMakePoint(x + offsetX, y + offsetY);
+                
+                if (isRevert) {
+                    startPoint = NSMakePoint(x + offsetX, rect.size.height - (y + offsetY));
+                }
+				
+                if ([[values objectAtIndex:j + 1] isKindOfClass:[NSNull class]]) {
+                    [path moveToPoint:startPoint];
+                    [path lineToPoint:startPoint];
+                    
+                    [path closePath];
+                    
+                    if ([dataSource respondsToSelector:@selector(graphView: colorForGraph:)]) {
+                        color = [dataSource graphView:self colorForGraph:i];
+                    } else {
+                        color = [YBGraphView colorByIndex:i];
+                    }
+                    
+                    [color set];
+                    [path stroke];
+                    
+                    lastPoint = startPoint;
+                    
+                    if (drawBullet) {
+                        bullet.color = [YBGraphView colorByIndex:i];
+                        [bullet drawAtPoint:startPoint];
+                    }
+                    
+                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
+                        YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
+                        
+                        pointInfo.x = startPoint.x;
+                        pointInfo.y = startPoint.y;
+                        
+                        if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                            pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
+                        } else {
+                            pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
+                        }
+                        
+                        [markers addObject:pointInfo];
+                        [pointInfo release];
+                    }
+                    
+                    continue;
+                }
+                
 				x = (j + 1) * stepX;
 				y = [[values objectAtIndex:j + 1] floatValue] * stepY;
 		
-				if (!zeroAsMinValue) {
+				if (!useMinValue) {
 					y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
 				}
 			
-				NSPoint endPoint = {x + offsetX, y + offsetY};
+				NSPoint endPoint = NSMakePoint(x + offsetX, y + offsetY);
 							
+                if (isRevert) {
+                    endPoint = NSMakePoint(x + offsetX, rect.size.height - (y + offsetY));
+                }
+                
 				[path moveToPoint:startPoint];
 				[path lineToPoint:endPoint];
 
@@ -357,7 +501,7 @@
 				if ([dataSource respondsToSelector:@selector(graphView: colorForGraph:)]) {
 					color = [dataSource graphView:self colorForGraph:i];
 				} else {
-					color = [self colorByIndex:i];
+					color = [YBGraphView colorByIndex:i];
 				}
 				
 				[color set];
@@ -365,21 +509,43 @@
 				
 				[points addObject:[NSValue valueWithPoint:startPoint]];
 				
-				if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
-					pointInfo = [[[YBPointInfo alloc] init] autorelease];
-								
-					pointInfo.x = startPoint.x;
-					pointInfo.y = startPoint.y;
-				
-					if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-						pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
-					} else {
-						pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
-					}
-				}
+                if (showMarkerNearPoint) {
+                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2) 
+                        && mousePoint.y > startPoint.y - (stepY / 2) && mousePoint.y < startPoint.y + (stepY / 2)) {
+                        YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
+                        
+                        pointInfo.x = startPoint.x;
+                        pointInfo.y = startPoint.y;
+                        
+                        if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                            pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
+                        } else {
+                            pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
+                        }
+                        
+                        [markers addObject:pointInfo];
+                        [pointInfo release];
+                    }
+                } else {
+                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
+                        YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
 
+                        pointInfo.x = startPoint.x;
+                        pointInfo.y = startPoint.y;
+				
+                        if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                            pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
+                        } else {
+                            pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
+                        }
+                    
+                        [markers addObject:pointInfo];
+                        [pointInfo release];
+                    }
+                }
+                
 				if (drawBullet) {
-					bullet.color = [self colorByIndex:i];
+					bullet.color = [YBGraphView colorByIndex:i];
 					[bullet drawAtPoint:startPoint];
 				}
 			
@@ -426,21 +592,49 @@
 			[points release];
 		}
 		
-		if (mousePoint.x > lastPoint.x - (stepX / 2) && mousePoint.x < lastPoint.x + (stepX / 2)) {
-			pointInfo = [[[YBPointInfo alloc] init] autorelease];
+        if (showMarkerNearPoint) {
+            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2)) 
+                && mousePoint.y > (lastPoint.y - (stepY / 2)) && mousePoint.y < (lastPoint.y + (stepY / 2))) {
+                YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
+                
+                pointInfo.x = lastPoint.x;
+                pointInfo.y = lastPoint.y;
+                
+                if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
+                    if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                        pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
+                    } else {
+                        pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1]];
+                    }
+                    
+                    [markers addObject:pointInfo];
+                }
+                
+                [pointInfo release];
+            }
+        } else {
+            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2))) {
+                YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
 			
-			pointInfo.x = lastPoint.x;
-			pointInfo.y = lastPoint.y;
+                pointInfo.x = lastPoint.x;
+                pointInfo.y = lastPoint.y;
 			
-			if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-				pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
-			} else {
-				pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1]];
-			}
+                if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
+                    if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                        pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
+                    } else {
+                        pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1]];
+                    }
+                
+                    [markers addObject:pointInfo];
+                }
+                
+                [pointInfo release];
+            }
 		}
-		
+        
 		if (drawBullet) {
-			bullet.color = [self colorByIndex:i];
+			bullet.color = [YBGraphView colorByIndex:i];
 			[bullet drawAtPoint:lastPoint];
 		}
 	}
@@ -462,53 +656,88 @@
 		[paragraphStyle release];
 	}
 	
-	// draw marker
+	// draw markers
 
-	if (showMarker && !hideMarker && enableMarker && pointInfo != nil) {
-		NSPoint point;
-		point.x = pointInfo.x;
-		point.y = pointInfo.y;
+	if (showMarker && !hideMarker && enableMarker) {
+        int i = 0;
 
-		[marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
+        for (YBPointInfo *pointInfo in markers) {
+            NSPoint point;
+            point.x = pointInfo.x;
+            point.y = pointInfo.y;
+            
+            [marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
+            i++;
+        }
 	}
+    
+    [markers release];
+    
+    if (drawBottomMarker) {
+        NSRectFill(NSMakeRect(100, 0, 120, 20));
+        
+        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		[paragraphStyle setAlignment:NSCenterTextAlignment];
+		
+		NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, infoFont, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+        
+        NSString *dateString = [series objectAtIndex:0];
+        [dateString drawInRect:NSMakeRect(100, 0, 120, 20) withAttributes:attsDict];
+        
+        [paragraphStyle release];
+    }
 }
 
 - (void)drawLegendInRect:(NSRect)rect {
 	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paragraphStyle setAlignment:NSLeftTextAlignment];
-		
+    [paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+    
+    int width = 0;
+    
+    for (int i = 0; i < [legends count]; i++) {
+        NSString *legend = [legends objectAtIndex:i];
+        
+        NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:legendFont, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+        NSSize size = [legend sizeWithAttributes:attsDict];
+
+        if (size.width > width) {
+            width = size.width;
+        }
+    }
+    
 	for (int i = 0; i < [legends count]; i++) {
 		int top = rect.size.height - OFFSET_X;
 		
 		NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, legendFont, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName,  paragraphStyle, NSParagraphStyleAttributeName, nil];
 			
-		[[self colorByIndex:i] set];
-		NSRectFill(NSMakeRect(rect.size.width - (OFFSET_LEGENT + 20), top - i * 30, 10, 10));
+		[[YBGraphView colorByIndex:i] set];
+		NSRectFill(NSMakeRect(rect.size.width - (width + OFFSET_X + 30), top - i * 30, 10, 10));
 			
-		[[legends objectAtIndex:i] drawInRect:NSMakeRect(rect.size.width - OFFSET_LEGENT, (top - i * 30) - 4, OFFSET_LEGENT - 10, 16) withAttributes:attsDict];
+		[[legends objectAtIndex:i] drawInRect:NSMakeRect(rect.size.width - width - OFFSET_X - 10, (top - i * 30) - 4, width, 16) withAttributes:attsDict];
 	}
 		
 	[paragraphStyle release];
 }
 
-- (NSColor *)colorByIndex:(NSInteger)index {
++ (NSColor *)colorByIndex:(NSInteger)index {
 	NSColor *color;
 	
 	switch (index) {
 		case 0:
-			color = [NSColor colorWithDeviceRed:5/255.0 green:141/255.0 blue:199/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:1/255.0 green:165/255.0 blue:218/255.0 alpha:1.0];
 			break;
 		case 1:
-			color = [NSColor colorWithDeviceRed:80/255.0 green:180/255.0 blue:50/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:122/255.0 green:184/255.0 blue:37/255.0 alpha:1.0];
 			break;		
 		case 2:
-			color = [NSColor colorWithDeviceRed:255/255.0 green:102/255.0 blue:0/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:202/255.0 green:85/255.0 blue:43/255.0 alpha:1.0];
 			break;
 		case 3:
-			color = [NSColor colorWithDeviceRed:255/255.0 green:158/255.0 blue:1/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:241/255.0 green:182/255.0 blue:49/255.0 alpha:1.0];
 			break;
 		case 4:
-			color = [NSColor colorWithDeviceRed:252/255.0 green:210/255.0 blue:2/255.0 alpha:1.0];
+			color = [NSColor colorWithDeviceRed:129/255.0 green:52/255.0 blue:79/255.0 alpha:1.0];
 			break;
 		case 5:
 			color = [NSColor colorWithDeviceRed:248/255.0 green:255/255.0 blue:1/255.0 alpha:1.0];

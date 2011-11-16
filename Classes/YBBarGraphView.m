@@ -43,7 +43,7 @@
     self = [super initWithFrame:frame];
 	
     if (self) {
-		self.formatter = [[NSNumberFormatter alloc] init];
+		formatter = [[NSNumberFormatter alloc] init];
 		
 		[formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
 		[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -76,10 +76,9 @@
 		self.infoFont = [NSFont fontWithName:@"Helvetica Neue" size:12];
 		self.legendFont = [NSFont boldSystemFontOfSize:11];
 		
-		self.marker = [[YBMarker alloc] init];
+		marker = [[YBMarker alloc] init];
 		
-		self.showMarker = NO;
-		
+		showMarker = NO;
 		enableMarker = YES;
 		
 		NSTrackingAreaOptions trackingOptions =	NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
