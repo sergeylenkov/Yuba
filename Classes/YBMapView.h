@@ -40,7 +40,6 @@
 	BOOL enableMarker;
 	NSTrackingArea *trackingArea;
 	NSPoint mousePoint;
-	
 	NSColor *backgroundColor;
 	NSColor *textColor;
 	NSColor *maxColor;	
@@ -66,8 +65,8 @@
 @property (nonatomic, retain) YBMarker *marker;
 @property (nonatomic, assign) BOOL showMarker;
 @property (nonatomic, assign) BOOL showMarkerForZeroValue;
-@property (nonatomic, retain) IBOutlet id <YBMapViewDelegate> delegate;
-@property (nonatomic, retain) IBOutlet id <YBMapViewDataSource> dataSource;
+@property (nonatomic, assign) IBOutlet id <YBMapViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <YBMapViewDataSource> dataSource;
 
 - (void)draw;
 - (void)drawHighlightInRect:(NSRect)rect forCountry:(NSString *)code;

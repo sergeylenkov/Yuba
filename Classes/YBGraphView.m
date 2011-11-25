@@ -109,7 +109,7 @@
 	
 	[series addObjectsFromArray:[dataSource seriesForGraphView:self]];
     
-	int count = [dataSource numberOfGraphsInGraphView:self];
+	NSInteger count = [dataSource numberOfGraphsInGraphView:self];
 	
 	for (int i = 0; i < count; i++) {
 		[graphs addObject:[dataSource graphView:self valuesForGraph:i]];
@@ -243,11 +243,11 @@
 	
 	[paragraphStyle release];
 	
-	int maxStep;
+	NSInteger maxStep;
 	
 	if ([series count] > 5) {
 		int stepCount = 5;
-		int count = [series count] - 1;
+		NSInteger count = [series count] - 1;
 		
 		for (int i = 4; i < 8; i++) {
 			if (count % i == 0) {
@@ -320,7 +320,7 @@
                 x = self.frame.size.width - (offsetX * 2);
             }
             
-            int index = i * step;
+            NSInteger index = i * step;
             
             if (index >= [series count]) {
                 index = [series count] - 1;

@@ -11,6 +11,32 @@
 #import "YBBullet.h"
 #import "YBPointInfo.h"
 
+@class YBGraphView;
+
+@protocol YBGraphViewDataSource
+
+@optional
+
+- (NSColor *)graphView:(YBGraphView *)graph colorForGraph:(NSInteger)index;
+- (NSString *)graphView:(YBGraphView *)graph legendTitleForGraph:(NSInteger)index;
+- (NSString *)graphView:(YBGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
+
+@required
+
+- (NSInteger)numberOfGraphsInGraphView:(YBGraphView *)graph;
+- (NSArray *)graphView:(YBGraphView *)graph valuesForGraph:(NSInteger)index;
+- (NSArray *)seriesForGraphView:(YBGraphView *)graph;
+
+@end
+
+@protocol YBGraphViewDelegate
+
+@optional
+
+- (void)graphView:(YBGraphView *)graph mouseMovedAboveElement:(NSInteger)index;
+
+@end
+
 @interface YBGraphView : NSView {
 	NSMutableArray *series;
 	NSMutableArray *graphs;
@@ -61,8 +87,6 @@
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, assign) BOOL drawLegend;
 @property (nonatomic, assign) BOOL showMarker;
-@property (nonatomic, retain) id delegate;
-@property (nonatomic, retain) id dataSource;
 @property (nonatomic, retain) YBMarker *marker;
 @property (nonatomic, retain) YBBullet *bullet;
 @property (nonatomic, retain) NSFont *font;
@@ -81,6 +105,8 @@
 @property (nonatomic, assign) NSInteger roundGridYTo;
 @property (nonatomic, assign) BOOL isRoundGridY;
 @property (nonatomic, assign) BOOL showMarkerNearPoint;
+@property (nonatomic, assign) IBOutlet id <YBGraphViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <YBGraphViewDataSource> dataSource;
 
 - (void)draw;
 - (void)drawLegendInRect:(NSRect)rect;
@@ -89,26 +115,3 @@
 
 @end
 
-@protocol YBGraphViewDataSource
-
-@optional
-
-- (NSColor *)graphView:(YBGraphView *)graph colorForGraph:(NSInteger)index;
-- (NSString *)graphView:(YBGraphView *)graph legendTitleForGraph:(NSInteger)index;
-- (NSString *)graphView:(YBGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
-
-@required
-
-- (NSInteger)numberOfGraphsInGraphView:(YBGraphView *)graph;
-- (NSArray *)graphView:(YBGraphView *)graph valuesForGraph:(NSInteger)index;
-- (NSArray *)seriesForGraphView:(YBGraphView *)graph;
-
-@end
-
-@protocol YBGraphViewDelegate
-
-@optional
-
-- (void)graphView:(YBGraphView *)graph mouseMovedAboveElement:(NSInteger)index;
-
-@end

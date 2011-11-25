@@ -455,20 +455,13 @@
 		return zeroColor;
 	}
 	
-	//float hue = [maxColor hueComponent];
-	//float saturation = (value / 70.0);
 	float brightness = 1.0 - (value / 50.0);
-	//float alfa = 1.0;
-	
-	/*if (saturation < 0.1) {
-		saturation = 0.1;
-	}*/
-	
+
 	if (brightness < 0.2) {
 		brightness = 0.2;
 	}
 
-	return [maxColor highlightWithLevel:brightness]; //[NSColor colorWithCalibratedHue:hue saturation:100.0 brightness:100.0 alpha:1.0];
+	return [maxColor highlightWithLevel:brightness];
 }
 
 - (void)mouseEntered:(NSEvent *)event {

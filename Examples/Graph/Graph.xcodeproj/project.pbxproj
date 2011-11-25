@@ -1,0 +1,318 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A544BCCF147FFA43003D21EF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A544BCCE147FFA43003D21EF /* Cocoa.framework */; };
+		A544BCD9147FFA44003D21EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A544BCD7147FFA44003D21EF /* InfoPlist.strings */; };
+		A544BCDB147FFA44003D21EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCDA147FFA44003D21EF /* main.m */; };
+		A544BCDF147FFA44003D21EF /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A544BCDD147FFA44003D21EF /* Credits.rtf */; };
+		A544BCE2147FFA44003D21EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCE1147FFA44003D21EF /* AppDelegate.m */; };
+		A544BCE5147FFA44003D21EF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A544BCE3147FFA44003D21EF /* MainMenu.xib */; };
+		A544BCF1147FFA62003D21EF /* YBGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCEC147FFA62003D21EF /* YBGraphView.m */; };
+		A544BCF2147FFA62003D21EF /* YBMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCEE147FFA62003D21EF /* YBMarker.m */; };
+		A544BCF3147FFA62003D21EF /* YBPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCF0147FFA62003D21EF /* YBPointInfo.m */; };
+		A544BCF6147FFA85003D21EF /* YBBullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCF5147FFA85003D21EF /* YBBullet.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A544BCCA147FFA43003D21EF /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A544BCCE147FFA43003D21EF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A544BCD1147FFA43003D21EF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A544BCD2147FFA43003D21EF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A544BCD3147FFA43003D21EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A544BCD6147FFA44003D21EF /* Graph-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Graph-Info.plist"; sourceTree = "<group>"; };
+		A544BCD8147FFA44003D21EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A544BCDA147FFA44003D21EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A544BCDC147FFA44003D21EF /* Graph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Graph-Prefix.pch"; sourceTree = "<group>"; };
+		A544BCDE147FFA44003D21EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A544BCE0147FFA44003D21EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A544BCE1147FFA44003D21EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A544BCE4147FFA44003D21EF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A544BCEB147FFA62003D21EF /* YBGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBGraphView.h; path = ../../../Classes/YBGraphView.h; sourceTree = "<group>"; };
+		A544BCEC147FFA62003D21EF /* YBGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBGraphView.m; path = ../../../Classes/YBGraphView.m; sourceTree = "<group>"; };
+		A544BCED147FFA62003D21EF /* YBMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMarker.h; path = ../../../Classes/YBMarker.h; sourceTree = "<group>"; };
+		A544BCEE147FFA62003D21EF /* YBMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMarker.m; path = ../../../Classes/YBMarker.m; sourceTree = "<group>"; };
+		A544BCEF147FFA62003D21EF /* YBPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBPointInfo.h; path = ../../../Classes/YBPointInfo.h; sourceTree = "<group>"; };
+		A544BCF0147FFA62003D21EF /* YBPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBPointInfo.m; path = ../../../Classes/YBPointInfo.m; sourceTree = "<group>"; };
+		A544BCF4147FFA85003D21EF /* YBBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBullet.h; path = ../../../Classes/YBBullet.h; sourceTree = "<group>"; };
+		A544BCF5147FFA85003D21EF /* YBBullet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBullet.m; path = ../../../Classes/YBBullet.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A544BCC7147FFA43003D21EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A544BCCF147FFA43003D21EF /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A544BCBF147FFA43003D21EF = {
+			isa = PBXGroup;
+			children = (
+				A544BCD4147FFA43003D21EF /* Graph */,
+				A544BCCD147FFA43003D21EF /* Frameworks */,
+				A544BCCB147FFA43003D21EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A544BCCB147FFA43003D21EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A544BCCA147FFA43003D21EF /* Graph.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A544BCCD147FFA43003D21EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A544BCCE147FFA43003D21EF /* Cocoa.framework */,
+				A544BCD0147FFA43003D21EF /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A544BCD0147FFA43003D21EF /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A544BCD1147FFA43003D21EF /* AppKit.framework */,
+				A544BCD2147FFA43003D21EF /* CoreData.framework */,
+				A544BCD3147FFA43003D21EF /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A544BCD4147FFA43003D21EF /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				A544BCF4147FFA85003D21EF /* YBBullet.h */,
+				A544BCF5147FFA85003D21EF /* YBBullet.m */,
+				A544BCEB147FFA62003D21EF /* YBGraphView.h */,
+				A544BCEC147FFA62003D21EF /* YBGraphView.m */,
+				A544BCED147FFA62003D21EF /* YBMarker.h */,
+				A544BCEE147FFA62003D21EF /* YBMarker.m */,
+				A544BCEF147FFA62003D21EF /* YBPointInfo.h */,
+				A544BCF0147FFA62003D21EF /* YBPointInfo.m */,
+				A544BCE0147FFA44003D21EF /* AppDelegate.h */,
+				A544BCE1147FFA44003D21EF /* AppDelegate.m */,
+				A544BCE3147FFA44003D21EF /* MainMenu.xib */,
+				A544BCD5147FFA44003D21EF /* Supporting Files */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		A544BCD5147FFA44003D21EF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A544BCD6147FFA44003D21EF /* Graph-Info.plist */,
+				A544BCD7147FFA44003D21EF /* InfoPlist.strings */,
+				A544BCDA147FFA44003D21EF /* main.m */,
+				A544BCDC147FFA44003D21EF /* Graph-Prefix.pch */,
+				A544BCDD147FFA44003D21EF /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A544BCC9147FFA43003D21EF /* Graph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A544BCE8147FFA44003D21EF /* Build configuration list for PBXNativeTarget "Graph" */;
+			buildPhases = (
+				A544BCC6147FFA43003D21EF /* Sources */,
+				A544BCC7147FFA43003D21EF /* Frameworks */,
+				A544BCC8147FFA43003D21EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Graph;
+			productName = Graph;
+			productReference = A544BCCA147FFA43003D21EF /* Graph.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A544BCC1147FFA43003D21EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Positive Team";
+			};
+			buildConfigurationList = A544BCC4147FFA43003D21EF /* Build configuration list for PBXProject "Graph" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A544BCBF147FFA43003D21EF;
+			productRefGroup = A544BCCB147FFA43003D21EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A544BCC9147FFA43003D21EF /* Graph */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A544BCC8147FFA43003D21EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A544BCD9147FFA44003D21EF /* InfoPlist.strings in Resources */,
+				A544BCDF147FFA44003D21EF /* Credits.rtf in Resources */,
+				A544BCE5147FFA44003D21EF /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A544BCC6147FFA43003D21EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A544BCDB147FFA44003D21EF /* main.m in Sources */,
+				A544BCE2147FFA44003D21EF /* AppDelegate.m in Sources */,
+				A544BCF1147FFA62003D21EF /* YBGraphView.m in Sources */,
+				A544BCF2147FFA62003D21EF /* YBMarker.m in Sources */,
+				A544BCF3147FFA62003D21EF /* YBPointInfo.m in Sources */,
+				A544BCF6147FFA85003D21EF /* YBBullet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A544BCD7147FFA44003D21EF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A544BCD8147FFA44003D21EF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A544BCDD147FFA44003D21EF /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A544BCDE147FFA44003D21EF /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A544BCE3147FFA44003D21EF /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A544BCE4147FFA44003D21EF /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A544BCE6147FFA44003D21EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A544BCE7147FFA44003D21EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A544BCE9147FFA44003D21EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Graph/Graph-Prefix.pch";
+				INFOPLIST_FILE = "Graph/Graph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A544BCEA147FFA44003D21EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Graph/Graph-Prefix.pch";
+				INFOPLIST_FILE = "Graph/Graph-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A544BCC4147FFA43003D21EF /* Build configuration list for PBXProject "Graph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A544BCE6147FFA44003D21EF /* Debug */,
+				A544BCE7147FFA44003D21EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A544BCE8147FFA44003D21EF /* Build configuration list for PBXNativeTarget "Graph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A544BCE9147FFA44003D21EF /* Debug */,
+				A544BCEA147FFA44003D21EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A544BCC1147FFA43003D21EF /* Project object */;
+}
