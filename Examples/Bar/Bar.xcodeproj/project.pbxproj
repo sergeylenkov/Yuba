@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A54197221480F2520023E339 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54197211480F2520023E339 /* Cocoa.framework */; };
+		A541972C1480F2520023E339 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A541972A1480F2520023E339 /* InfoPlist.strings */; };
+		A541972E1480F2520023E339 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A541972D1480F2520023E339 /* main.m */; };
+		A54197321480F2520023E339 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A54197301480F2520023E339 /* Credits.rtf */; };
+		A54197351480F2520023E339 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A54197341480F2520023E339 /* AppDelegate.m */; };
+		A54197381480F2530023E339 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54197361480F2530023E339 /* MainMenu.xib */; };
+		A5419744148103D60023E339 /* YBBarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A541973F148103D60023E339 /* YBBarGraphView.m */; };
+		A5419745148103D60023E339 /* YBMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = A5419741148103D60023E339 /* YBMarker.m */; };
+		A5419746148103D60023E339 /* YBPointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5419743148103D60023E339 /* YBPointInfo.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A541971D1480F2520023E339 /* Bar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54197211480F2520023E339 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		A54197241480F2520023E339 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A54197251480F2520023E339 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A54197261480F2520023E339 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A54197291480F2520023E339 /* Bar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bar-Info.plist"; sourceTree = "<group>"; };
+		A541972B1480F2520023E339 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A541972D1480F2520023E339 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A541972F1480F2520023E339 /* Bar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bar-Prefix.pch"; sourceTree = "<group>"; };
+		A54197311480F2520023E339 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A54197331480F2520023E339 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A54197341480F2520023E339 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A54197371480F2530023E339 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A541973E148103D60023E339 /* YBBarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBBarGraphView.h; path = ../../../Classes/YBBarGraphView.h; sourceTree = "<group>"; };
+		A541973F148103D60023E339 /* YBBarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBBarGraphView.m; path = ../../../Classes/YBBarGraphView.m; sourceTree = "<group>"; };
+		A5419740148103D60023E339 /* YBMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBMarker.h; path = ../../../Classes/YBMarker.h; sourceTree = "<group>"; };
+		A5419741148103D60023E339 /* YBMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBMarker.m; path = ../../../Classes/YBMarker.m; sourceTree = "<group>"; };
+		A5419742148103D60023E339 /* YBPointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YBPointInfo.h; path = ../../../Classes/YBPointInfo.h; sourceTree = "<group>"; };
+		A5419743148103D60023E339 /* YBPointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YBPointInfo.m; path = ../../../Classes/YBPointInfo.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A541971A1480F2520023E339 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54197221480F2520023E339 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A54197121480F2520023E339 = {
+			isa = PBXGroup;
+			children = (
+				A54197271480F2520023E339 /* Bar */,
+				A54197201480F2520023E339 /* Frameworks */,
+				A541971E1480F2520023E339 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A541971E1480F2520023E339 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A541971D1480F2520023E339 /* Bar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A54197201480F2520023E339 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A54197211480F2520023E339 /* Cocoa.framework */,
+				A54197231480F2520023E339 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A54197231480F2520023E339 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A54197241480F2520023E339 /* AppKit.framework */,
+				A54197251480F2520023E339 /* CoreData.framework */,
+				A54197261480F2520023E339 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A54197271480F2520023E339 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				A541973E148103D60023E339 /* YBBarGraphView.h */,
+				A541973F148103D60023E339 /* YBBarGraphView.m */,
+				A5419740148103D60023E339 /* YBMarker.h */,
+				A5419741148103D60023E339 /* YBMarker.m */,
+				A5419742148103D60023E339 /* YBPointInfo.h */,
+				A5419743148103D60023E339 /* YBPointInfo.m */,
+				A54197331480F2520023E339 /* AppDelegate.h */,
+				A54197341480F2520023E339 /* AppDelegate.m */,
+				A54197361480F2530023E339 /* MainMenu.xib */,
+				A54197281480F2520023E339 /* Supporting Files */,
+			);
+			path = Bar;
+			sourceTree = "<group>";
+		};
+		A54197281480F2520023E339 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A54197291480F2520023E339 /* Bar-Info.plist */,
+				A541972A1480F2520023E339 /* InfoPlist.strings */,
+				A541972D1480F2520023E339 /* main.m */,
+				A541972F1480F2520023E339 /* Bar-Prefix.pch */,
+				A54197301480F2520023E339 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A541971C1480F2520023E339 /* Bar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A541973B1480F2530023E339 /* Build configuration list for PBXNativeTarget "Bar" */;
+			buildPhases = (
+				A54197191480F2520023E339 /* Sources */,
+				A541971A1480F2520023E339 /* Frameworks */,
+				A541971B1480F2520023E339 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bar;
+			productName = Bar;
+			productReference = A541971D1480F2520023E339 /* Bar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A54197141480F2520023E339 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Positive Team";
+			};
+			buildConfigurationList = A54197171480F2520023E339 /* Build configuration list for PBXProject "Bar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A54197121480F2520023E339;
+			productRefGroup = A541971E1480F2520023E339 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A541971C1480F2520023E339 /* Bar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A541971B1480F2520023E339 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A541972C1480F2520023E339 /* InfoPlist.strings in Resources */,
+				A54197321480F2520023E339 /* Credits.rtf in Resources */,
+				A54197381480F2530023E339 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A54197191480F2520023E339 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A541972E1480F2520023E339 /* main.m in Sources */,
+				A54197351480F2520023E339 /* AppDelegate.m in Sources */,
+				A5419744148103D60023E339 /* YBBarGraphView.m in Sources */,
+				A5419745148103D60023E339 /* YBMarker.m in Sources */,
+				A5419746148103D60023E339 /* YBPointInfo.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A541972A1480F2520023E339 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A541972B1480F2520023E339 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A54197301480F2520023E339 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A54197311480F2520023E339 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A54197361480F2530023E339 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A54197371480F2530023E339 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A54197391480F2530023E339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A541973A1480F2530023E339 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A541973C1480F2530023E339 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bar/Bar-Prefix.pch";
+				INFOPLIST_FILE = "Bar/Bar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A541973D1480F2530023E339 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bar/Bar-Prefix.pch";
+				INFOPLIST_FILE = "Bar/Bar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A54197171480F2520023E339 /* Build configuration list for PBXProject "Bar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A54197391480F2530023E339 /* Debug */,
+				A541973A1480F2530023E339 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A541973B1480F2530023E339 /* Build configuration list for PBXNativeTarget "Bar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A541973C1480F2530023E339 /* Debug */,
+				A541973D1480F2530023E339 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A54197141480F2520023E339 /* Project object */;
+}

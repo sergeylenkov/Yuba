@@ -34,9 +34,11 @@
 @synthesize textColor;
 @synthesize borderColor;
 @synthesize highlightColor;
-@synthesize lineWidth;
 @synthesize borderWidth;
-@synthesize onlyTopLine;
+@synthesize pickHeight;
+@synthesize spaceBetweenBars;
+@synthesize drawPeaksOnly;
+@synthesize drawBarWithPeak;
 @synthesize highlightBar;
 
 - (id)initWithFrame:(NSRect)frame {
@@ -62,11 +64,13 @@
 		info = @"";
 		
 		drawLegend = NO;
-		onlyTopLine = NO;
+		drawPeaksOnly = NO;
+        drawBarWithPeak = YES;
 		highlightBar = YES;
-		lineWidth = 2.0;
-		borderWidth = 2.0;
-		
+		borderWidth = 0.0;
+		pickHeight = 2.0;
+        spaceBetweenBars = 1;
+        
 		self.backgroundColor = [NSColor colorWithDeviceRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
 		self.textColor = [NSColor colorWithDeviceRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
 		self.borderColor = [NSColor colorWithDeviceRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:1.0];
@@ -90,13 +94,28 @@
     return self;
 }
 
+- (void)dealloc {
+	[series release];
+	[graphs release];
+	[legends release];
+	[formatter release];
+	[info release];
+	[font release];
+	[marker release];
+	[backgroundColor release];
+	[textColor release];
+	[highlightColor release];
+	[self removeTrackingArea:trackingArea];
+	[super dealloc];
+}
+
 - (void)draw {
 	[series removeAllObjects];
 	[graphs removeAllObjects];
 	[legends removeAllObjects];
 	
 	series = [[NSMutableArray arrayWithArray:[dataSource seriesForBarGraphView:self]] retain];
-	int count = [dataSource numberOfGraphsInBarGraphView:self];
+	NSInteger count = [dataSource numberOfGraphsInBarGraphView:self];
 	
 	for (int i = 0; i < count; i++) {
 		[graphs addObject:[dataSource barGraphView:self valuesForGraph:i]];
@@ -177,7 +196,7 @@
 	NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
 	for (int i = 0; i < 6; i++) {
-		int y = (i * step) * stepY;
+		NSInteger y = (i * step) * stepY;
 		int value = i * step;
 		
 		if (drawGridY) {
@@ -208,11 +227,11 @@
 	
 	[paragraphStyle release];
 	
-	int maxStep;
+	NSInteger maxStep;
 	
 	if ([series count] > 5) {
-		int stepCount = 5;
-		int count = [series count] - 1;
+		NSInteger stepCount = 5;
+		NSInteger count = [series count] - 1;
 		
 		for (int i = 4; i < 8; i++) {
 			if (count % i == 0) {
@@ -227,7 +246,7 @@
 		maxStep = [series count];
 	}
 	
-	float stepX = (self.frame.size.width - (offsetX * 2)) / ([series count] - 1);
+	NSInteger stepX = ceil((self.frame.size.width - (offsetX * 2)) / ([series count] - 1));
 	
 	paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paragraphStyle setAlignment:NSCenterTextAlignment];
@@ -237,13 +256,13 @@
 	YBPointInfo *pointInfo = nil;
 	
 	for (int i = 0; i < maxStep; i++) {
-		int x = (i * step) * stepX;
+		NSInteger x = (i * step) * stepX;
 		
 		if (x > self.frame.size.width - (offsetX * 2)) {
 			x = self.frame.size.width - (offsetX * 2);
 		}
 		
-		int index = i * step;
+		NSInteger index = i * step;
 		
 		if (index >= [series count]) {
 			index = [series count] - 1;
@@ -283,28 +302,32 @@
 		NSMutableArray *values = [graphs objectAtIndex:i];
 		
 		for (int j = 0; j < [values count] - 1; j++) {
-			int x = j * stepX;
-			int y = [[values objectAtIndex:j] intValue] * stepY;
+			NSInteger x = j * stepX;
+			NSInteger y = [[values objectAtIndex:j] intValue] * stepY;
 			
-			if (onlyTopLine) {
-				NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(x + offsetX, y + offsetY + lineWidth, stepX - borderWidth, lineWidth)];			
-				[path setLineWidth:0.0];
-								
-				if ([dataSource respondsToSelector:@selector(barGraphView: colorForGraph:)]) {
-					[[dataSource barGraphView:self colorForGraph:i] set];
+			if (drawPeaksOnly || drawBarWithPeak) {
+				NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(x + offsetX, y + offsetY - pickHeight, round(stepX) - spaceBetweenBars, pickHeight)];			
+
+				if ([dataSource respondsToSelector:@selector(barGraphView: colorForPeak:)]) {
+					[[dataSource barGraphView:self colorForPeak:i] set];
 				} else {
 					[[self colorByIndex:i] set];
 				}
 				
 				[path fill];
-			} else {
-				NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(x + offsetX, offsetY, stepX - borderWidth, y)];			
-				[path setLineWidth:borderWidth];
+			} 
+            
+            if (!drawPeaksOnly) {
+				NSBezierPath *path = [NSBezierPath bezierPathWithRect:NSMakeRect(x + offsetX, offsetY, stepX - spaceBetweenBars, y)];
+                
+                if (borderWidth > 0.0) {
+                    [path setLineWidth:borderWidth];
+                    
+                    [borderColor set];
+                    [path stroke];
+                }
 				
-				[borderColor set];
-				[path stroke];
-				
-				bool highlight = false;
+				BOOL highlight = NO;
 				
 				if ([path containsPoint:mousePoint]) {
 					pointInfo = [[[YBPointInfo alloc] init] autorelease];
@@ -317,17 +340,24 @@
 						pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
 					}
 					
-					highlight = true;
+					highlight = YES;
 				}
 				
 				if (highlight && highlightBar) {
 					[highlightColor set];					
 				} else {
-					if ([dataSource respondsToSelector:@selector(barGraphView: colorForGraph:)]) {
-						[[dataSource barGraphView:self colorForGraph:i] set];
-					} else {
-						[[self colorByIndex:i] set];
-					}
+                    if ([dataSource respondsToSelector:@selector(barGraphView: colorForGraph:)]) {
+                        [[dataSource barGraphView:self colorForGraph:i] set];
+                    } else {
+                        if (drawBarWithPeak) {
+                            NSColor *indexColor = [self colorByIndex:i];
+                            NSColor *color = [NSColor colorWithDeviceHue:indexColor.hueComponent saturation:indexColor.saturationComponent brightness:indexColor.brightnessComponent alpha:0.1];
+                            
+                            [color set];
+                        } else {
+                            [[self colorByIndex:i] set];
+                        }
+                    }
 				}
 				
 				[path fill];
@@ -454,21 +484,6 @@
 	
 	trackingArea = [[[NSTrackingArea alloc] initWithRect:[self bounds] options:trackingOptions owner:self userInfo:nil] autorelease];
 	[self addTrackingArea:trackingArea];
-}
-
-- (void)dealloc {
-	[series release];
-	[graphs release];
-	[legends release];
-	[formatter release];
-	[info release];
-	[font release];
-	[marker release];
-	[backgroundColor release];
-	[textColor release];
-	[highlightColor release];
-	[self removeTrackingArea:trackingArea];
-	[super dealloc];
 }
 
 @end
