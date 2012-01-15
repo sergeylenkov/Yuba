@@ -418,11 +418,19 @@
                 }
                      
 				int x = j * stepX;
-				int y = [[values objectAtIndex:j] floatValue] * stepY;
+				int y = 0;
 
-				if (!useMinValue) {
-					y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
-				}
+				if (useMinValue) {
+                    float value = [[values objectAtIndex:j] floatValue];
+                    
+                    if (value < minValue) {
+                        value = minValue;
+                    }
+                    
+					y = value * stepY;
+				} else {
+                    y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
+                }
 			
 				NSBezierPath *path = [NSBezierPath bezierPath];
 		
@@ -481,11 +489,19 @@
                 }
                 
 				x = (j + 1) * stepX;
-				y = [[values objectAtIndex:j + 1] floatValue] * stepY;
+				y = 0;
 		
-				if (!useMinValue) {
-					y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
-				}
+				if (useMinValue) {
+                    float value = [[values objectAtIndex:j + 1] floatValue];
+                    
+					if (value < minValue) {
+                        value = minValue;
+                    }
+                    
+                    y = value * stepY;
+				} else {
+                    y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
+                }
 			
 				NSPoint endPoint = NSMakePoint(x + offsetX, y + offsetY);
 							
