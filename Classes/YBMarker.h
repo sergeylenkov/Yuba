@@ -21,7 +21,6 @@ enum {
 	NSColor *borderColor;
 	NSInteger borderWidht;
 	NSInteger type;
-	NSInteger position;
 	BOOL shadow;
 }
 
@@ -31,7 +30,6 @@ enum {
 @property (nonatomic, retain) NSColor *borderColor;
 @property (nonatomic, assign) NSInteger borderWidht;
 @property (nonatomic, assign) NSInteger type;
-@property (nonatomic, assign) NSInteger position;
 @property (nonatomic, assign) BOOL shadow;
 
 - (void)drawAtPoint:(NSPoint)point inRect:(NSRect)rect withTitle:(NSString *)title;

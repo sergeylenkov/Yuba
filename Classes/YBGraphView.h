@@ -20,6 +20,7 @@
 - (NSColor *)graphView:(YBGraphView *)graph colorForGraph:(NSInteger)index;
 - (NSString *)graphView:(YBGraphView *)graph legendTitleForGraph:(NSInteger)index;
 - (NSString *)graphView:(YBGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
+- (NSView *)graphView:(YBGraphView *)graph markerViewForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex;
 
 @required
 
@@ -76,6 +77,7 @@
     BOOL isRoundGridY;
 	id delegate;
 	id dataSource;
+    NSMutableArray *_customMarkers;
 }
 
 @property (nonatomic, retain) NSNumberFormatter *formatter;
@@ -109,7 +111,6 @@
 @property (nonatomic, assign) IBOutlet id <YBGraphViewDataSource> dataSource;
 
 - (void)draw;
-- (void)drawLegendInRect:(NSRect)rect;
 
 + (NSColor *)colorByIndex:(NSInteger)index;
 

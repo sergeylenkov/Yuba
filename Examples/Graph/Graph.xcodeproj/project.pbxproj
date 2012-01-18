@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5208B6814C6EE8C0054668E /* MarkerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A5208B6714C6EE8C0054668E /* MarkerView.m */; };
+		A5208B7B14C7284B0054668E /* Tooltip.png in Resources */ = {isa = PBXBuildFile; fileRef = A5208B7A14C7284A0054668E /* Tooltip.png */; };
 		A544BCCF147FFA43003D21EF /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A544BCCE147FFA43003D21EF /* Cocoa.framework */; };
 		A544BCD9147FFA44003D21EF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A544BCD7147FFA44003D21EF /* InfoPlist.strings */; };
 		A544BCDB147FFA44003D21EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A544BCDA147FFA44003D21EF /* main.m */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A5208B6614C6EE8C0054668E /* MarkerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkerView.h; sourceTree = "<group>"; };
+		A5208B6714C6EE8C0054668E /* MarkerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkerView.m; sourceTree = "<group>"; };
+		A5208B7A14C7284A0054668E /* Tooltip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tooltip.png; sourceTree = "<group>"; };
 		A544BCCA147FFA43003D21EF /* Graph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A544BCCE147FFA43003D21EF /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A544BCD1147FFA43003D21EF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -94,6 +99,7 @@
 		A544BCD4147FFA43003D21EF /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				A5208B7A14C7284A0054668E /* Tooltip.png */,
 				A544BCF4147FFA85003D21EF /* YBBullet.h */,
 				A544BCF5147FFA85003D21EF /* YBBullet.m */,
 				A544BCEB147FFA62003D21EF /* YBGraphView.h */,
@@ -104,6 +110,8 @@
 				A544BCF0147FFA62003D21EF /* YBPointInfo.m */,
 				A544BCE0147FFA44003D21EF /* AppDelegate.h */,
 				A544BCE1147FFA44003D21EF /* AppDelegate.m */,
+				A5208B6614C6EE8C0054668E /* MarkerView.h */,
+				A5208B6714C6EE8C0054668E /* MarkerView.m */,
 				A544BCE3147FFA44003D21EF /* MainMenu.xib */,
 				A544BCD5147FFA44003D21EF /* Supporting Files */,
 			);
@@ -176,6 +184,7 @@
 				A544BCD9147FFA44003D21EF /* InfoPlist.strings in Resources */,
 				A544BCDF147FFA44003D21EF /* Credits.rtf in Resources */,
 				A544BCE5147FFA44003D21EF /* MainMenu.xib in Resources */,
+				A5208B7B14C7284B0054668E /* Tooltip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +201,7 @@
 				A544BCF2147FFA62003D21EF /* YBMarker.m in Sources */,
 				A544BCF3147FFA62003D21EF /* YBPointInfo.m in Sources */,
 				A544BCF6147FFA85003D21EF /* YBBullet.m in Sources */,
+				A5208B6814C6EE8C0054668E /* MarkerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +321,7 @@
 				A544BCEA147FFA44003D21EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

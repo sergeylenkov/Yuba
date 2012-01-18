@@ -13,6 +13,13 @@
 #define OFFSET_WITH_INFO_Y 60
 #define OFFSET_LEGENT 160
 
+@interface YBGraphView (Private)
+
+- (void)drawLegendInRect:(NSRect)rect;
+- (void)drawCustomView:(NSView *)view atPoint:(NSPoint)point inRect:(NSRect)rect;
+
+@end
+
 @implementation YBGraphView
 
 @synthesize formatter;
@@ -45,6 +52,26 @@
 @synthesize isRoundGridY;
 @synthesize showMarkerNearPoint;
 
+- (void)dealloc {
+	[series release];
+	[graphs release];
+	[legends release];
+	[formatter release];
+	[info release];
+	[marker release];
+    [bullet release];
+	[backgroundColor release];
+	[textColor release];
+    [font release];
+    [infoFont release];
+    [legends release];
+    [_customMarkers release];
+    
+	[self removeTrackingArea:trackingArea];
+    
+	[super dealloc];
+}
+
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
 	
@@ -62,7 +89,8 @@
 		series = [[NSMutableArray alloc] init];
 		graphs = [[NSMutableArray alloc] init];
 		legends = [[NSMutableArray alloc] init];
-		
+		_customMarkers = [[NSMutableArray alloc] init];
+        
 		drawInfo = NO;
 		info = @"";
 		
@@ -532,6 +560,8 @@
                         
                         pointInfo.x = startPoint.x;
                         pointInfo.y = startPoint.y;
+                        pointInfo.graph = i;
+                        pointInfo.element = j;
                         
                         if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
                             pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
@@ -548,7 +578,9 @@
 
                         pointInfo.x = startPoint.x;
                         pointInfo.y = startPoint.y;
-				
+                        pointInfo.graph = i;
+                        pointInfo.element = j;
+                        
                         if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
                             pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
                         } else {
@@ -615,6 +647,8 @@
                 
                 pointInfo.x = lastPoint.x;
                 pointInfo.y = lastPoint.y;
+                pointInfo.graph = i;
+                pointInfo.element = [values count] - 1;
                 
                 if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
                     if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
@@ -634,7 +668,9 @@
 			
                 pointInfo.x = lastPoint.x;
                 pointInfo.y = lastPoint.y;
-			
+                pointInfo.graph = i;
+                pointInfo.element = [values count] - 1;
+                
                 if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
                     if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
                         pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
@@ -675,15 +711,25 @@
 	// draw markers
 
 	if (showMarker && !hideMarker && enableMarker) {
-        int i = 0;
-
+        for (NSView *view in _customMarkers) {
+            [view removeFromSuperview];
+        }
+        
+        [_customMarkers removeAllObjects];
+         
         for (YBPointInfo *pointInfo in markers) {
             NSPoint point;
             point.x = pointInfo.x;
             point.y = pointInfo.y;
             
-            [marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
-            i++;
+            if ([dataSource respondsToSelector:@selector(graphView: markerViewForGraph: forElement:)]) {
+                NSView *customMarker = [dataSource graphView:self markerViewForGraph:pointInfo.graph forElement:pointInfo.element];
+                
+                [self drawCustomView:customMarker atPoint:point inRect:rect];
+                [_customMarkers addObject:customMarker];
+            } else {
+                [marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
+            }
         }
 	}
     
@@ -736,6 +782,58 @@
 	[paragraphStyle release];
 }
 
+- (void)drawCustomView:(NSView *)customView atPoint:(NSPoint)point inRect:(NSRect)rect {
+    NSSize size = customView.bounds.size;
+    int offsetY = 4;
+        
+    if (point.y + size.height > rect.size.height) {
+        offsetY = (size.height + 4) * -1;
+    }
+        
+    [customView setFrameOrigin:NSMakePoint(point.x - (size.width / 2), point.y + offsetY)];
+    [self addSubview:customView];
+}
+
+
+#pragma mark -
+#pragma mark Mouse Events
+#pragma mark -
+
+- (void)mouseDown:(NSEvent *)event {
+	enableMarker = !enableMarker;
+	[self setNeedsDisplay:YES];
+}
+
+- (void)mouseEntered:(NSEvent *)event {
+	hideMarker = NO;	
+	[self setNeedsDisplay:YES];
+}
+
+- (void)mouseExited:(NSEvent *)event {
+	hideMarker = YES;	
+	[self setNeedsDisplay:YES];
+}
+
+- (void)mouseMoved:(NSEvent *)event {
+	NSPoint location = [event locationInWindow];
+	mousePoint = [self convertPoint:location fromView:nil];
+
+	[self setNeedsDisplay:YES];
+}
+
+- (void)updateTrackingAreas {
+	[self removeTrackingArea:trackingArea];
+	
+	NSTrackingAreaOptions trackingOptions =	NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
+	
+	trackingArea = [[[NSTrackingArea alloc] initWithRect:[self bounds] options:trackingOptions owner:self userInfo:nil] autorelease];
+	[self addTrackingArea:trackingArea];
+}
+
+#pragma mark -
+#pragma mark Utilites
+#pragma mark -
+
 + (NSColor *)colorByIndex:(NSInteger)index {
 	NSColor *color;
 	
@@ -776,51 +874,6 @@
 	}
 	
 	return color;
-}
-
-- (void)mouseDown:(NSEvent *)event {
-	enableMarker = !enableMarker;
-	[self setNeedsDisplay:YES];
-}
-
-- (void)mouseEntered:(NSEvent *)event {
-	hideMarker = NO;	
-	[self setNeedsDisplay:YES];
-}
-
-- (void)mouseExited:(NSEvent *)event {
-	hideMarker = YES;	
-	[self setNeedsDisplay:YES];
-}
-
-- (void)mouseMoved:(NSEvent *)event {
-	NSPoint location = [event locationInWindow];
-	mousePoint = [self convertPoint:location fromView:nil];
-
-	[self setNeedsDisplay:YES];
-}
-
-- (void)updateTrackingAreas {
-	[self removeTrackingArea:trackingArea];
-	
-	NSTrackingAreaOptions trackingOptions =	NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInActiveApp;
-	
-	trackingArea = [[[NSTrackingArea alloc] initWithRect:[self bounds] options:trackingOptions owner:self userInfo:nil] autorelease];
-	[self addTrackingArea:trackingArea];
-}
-
-- (void)dealloc {
-	[series release];
-	[graphs release];
-	[legends release];
-	[formatter release];
-	[info release];
-	[font release];
-	[marker release];
-	[backgroundColor release];
-	[textColor release];
-	[self removeTrackingArea:trackingArea];
-	[super dealloc];
 }
 
 @end

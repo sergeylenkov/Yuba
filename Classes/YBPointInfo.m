@@ -13,6 +13,8 @@
 @synthesize x;
 @synthesize y;
 @synthesize title;
+@synthesize graph;
+@synthesize element;
 
 - (void)dealloc {
 	[title release];

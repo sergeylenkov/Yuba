@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "YBGraphView.h"
+#import "MarkerView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSMutableArray *series;
     NSMutableArray *values;
+    IBOutlet MarkerView *markerView;
 }
 
 @property (assign) IBOutlet NSWindow *window;

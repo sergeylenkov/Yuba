@@ -16,7 +16,6 @@
 @synthesize borderColor;
 @synthesize borderWidht;
 @synthesize type;
-@synthesize position;
 @synthesize shadow;
 
 - (id)init {
@@ -32,7 +31,6 @@
 		
 		self.borderWidht = 2;
 		self.type = 0;
-		self.position = 0;
 		self.shadow = NO;
 	}
 	
@@ -206,7 +204,6 @@
 		
 		[backgroundColor set];
 		[path fill];
-		
 		
 		int offsetX = rectWidth - width;
 		int offsetY = rectHeight - height;

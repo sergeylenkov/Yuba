@@ -12,10 +12,14 @@
 	NSInteger x;
 	NSInteger y;
 	NSString *title;
+    NSInteger graph;
+    NSInteger element;
 }
 
 @property (nonatomic, assign) NSInteger x;
 @property (nonatomic, assign) NSInteger y;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, assign) NSInteger graph;
+@property (nonatomic, assign) NSInteger element;
 
 @end

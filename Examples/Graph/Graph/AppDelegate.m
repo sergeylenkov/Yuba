@@ -39,6 +39,8 @@
 	graphView.marker.type = YBMarkerTypeRectWithArrow;
 	graphView.marker.shadow = YES;
     
+    //markerView = [[MarkerView alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+
     [graphView draw];
 }
 
@@ -60,6 +62,13 @@
 
 - (NSString *)graphView:(YBGraphView *)graph markerTitleForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex {
 	return [NSString stringWithFormat:@"%@\n%d", [series objectAtIndex:elementIndex], [[values objectAtIndex:elementIndex] intValue]];
+}
+
+- (NSView *)graphView:(YBGraphView *)graph markerViewForGraph:(NSInteger)graphIndex forElement:(NSInteger)elementIndex {
+    //MarkerView *_markerView = [[MarkerView alloc] initWithFrame:CGRectMake(0, 0, 60, 20)];
+    //_markerView.text = [NSString stringWithFormat:@"%d", [[values objectAtIndex:elementIndex] intValue]];
+    markerView.text = [NSString stringWithFormat:@"%d", [[values objectAtIndex:elementIndex] intValue]];
+    return markerView;
 }
 
 @end
