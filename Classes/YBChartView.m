@@ -120,13 +120,13 @@
 	NSMutableArray *chartSeries = [[NSMutableArray alloc] init];
 	NSMutableArray *chartValues = [[NSMutableArray alloc] init];
 	
-	int maxCount = 0;
+	int maxCount = [values count];
 	
-	for (int i = 0; i < [values count]; i++) {
-		if ([[values objectAtIndex:i] floatValue] > 0.0) {
-			maxCount = maxCount + 1;
-		}
-	}
+//	for (int i = 0; i < [values count]; i++) {
+//		if ([[values objectAtIndex:i] floatValue] > 0.0) {
+//			maxCount = maxCount + 1;
+//		}
+//	}
 	
 	if (maxCount > maxChartsCount) {
 		maxCount = maxChartsCount;		
@@ -147,9 +147,9 @@
 		[chartSeries addObject:@"Other"];
 		[chartValues addObject:[NSNumber numberWithFloat:other]];
 	}	
-	
-	float chartSpaceHeight;// = rect.size.height;
-	float chartSpaceWidth;// = rect.size.width;
+
+	float chartSpaceHeight;
+	float chartSpaceWidth;
 	
 	if (drawLegend) {
 		chartSpaceWidth = rect.size.width - OFFSET_LEGENT;
@@ -201,6 +201,10 @@
 		float percents = [[chartValues objectAtIndex:i] floatValue] / percent;
 		float endAngle = startAngle + percents * 3.6;
 
+        if (percents == 0.0) {
+            continue;
+        }
+        
 		NSBezierPath *path = [NSBezierPath bezierPath];
 		[path setLineWidth:0.1];
 
