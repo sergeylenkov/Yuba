@@ -421,7 +421,7 @@
 		
 		if ([values count] == 1) {
 			int x = (self.frame.size.width) / 2;
-			int y = [[values objectAtIndex:0] intValue] * stepY;
+			int y = [[values objectAtIndex:0] floatValue] * stepY;
 			
 			if (!useMinValue) {
 				y = ([[values objectAtIndex:0] floatValue] - minY) * stepY;
