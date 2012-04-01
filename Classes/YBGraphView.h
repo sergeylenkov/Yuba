@@ -68,7 +68,8 @@
 	NSColor *backgroundColor;
 	NSColor *textColor;	
 	CGFloat lineWidth;
-	BOOL drawBullet;
+	BOOL drawBullets;
+    BOOL highlightBullet;
 	YBBullet *bullet;	
 	BOOL fillGraph;
 	BOOL drawBottomMarker;
@@ -97,7 +98,8 @@
 @property (nonatomic, retain) NSColor *backgroundColor;
 @property (nonatomic, retain) NSColor *textColor;
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, assign) BOOL drawBullet;
+@property (nonatomic, assign) BOOL drawBullets;
+@property (nonatomic, assign) BOOL highlightBullet;
 @property (nonatomic, assign) BOOL useMinValue;
 @property (nonatomic, assign) float minValue;
 @property (nonatomic, assign) BOOL isRevert;

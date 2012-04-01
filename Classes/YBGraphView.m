@@ -41,7 +41,8 @@
 @synthesize backgroundColor;
 @synthesize textColor;
 @synthesize lineWidth;
-@synthesize drawBullet;
+@synthesize drawBullets;
+@synthesize highlightBullet;
 @synthesize useMinValue;
 @synthesize minValue;
 @synthesize fillGraph;
@@ -95,7 +96,8 @@
 		info = @"";
 		
 		drawLegend = NO;
-		drawBullet = NO;
+		drawBullets = NO;
+        highlightBullet = YES;
 		lineWidth = 1.2;
 		
 		self.backgroundColor = [NSColor colorWithDeviceRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
@@ -492,7 +494,7 @@
                     
                     lastPoint = startPoint;
                     
-                    if (drawBullet) {
+                    if (drawBullets) {
                         bullet.color = [YBGraphView colorByIndex:i];
                         [bullet drawAtPoint:startPoint];
                     }
@@ -553,9 +555,11 @@
 				
 				[points addObject:[NSValue valueWithPoint:startPoint]];
 				
+                BOOL isHighlighted = NO;
+                
                 if (showMarkerNearPoint) {
-                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2) 
-                        && mousePoint.y > startPoint.y - (stepY / 2) && mousePoint.y < startPoint.y + (stepY / 2)) {
+                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2) && 
+                        mousePoint.y > startPoint.y - (stepY / 2) && mousePoint.y < startPoint.y + (stepY / 2)) {
                         YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
                         
                         pointInfo.x = startPoint.x;
@@ -571,6 +575,8 @@
                         
                         [markers addObject:pointInfo];
                         [pointInfo release];
+                        
+                        isHighlighted = YES;
                     }
                 } else {
                     if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
@@ -589,13 +595,22 @@
                     
                         [markers addObject:pointInfo];
                         [pointInfo release];
+                        
+                        isHighlighted = YES;
                     }
                 }
                 
-				if (drawBullet) {
+				if (drawBullets) {
+                    if (!highlightBullet) {
+                        isHighlighted = NO;
+                    }
+                    
 					bullet.color = [YBGraphView colorByIndex:i];
-					[bullet drawAtPoint:startPoint];
-				}
+					[bullet drawAtPoint:startPoint highlighted:isHighlighted];
+				} else if (highlightBullet && isHighlighted) {
+                    bullet.color = [YBGraphView colorByIndex:i];
+					[bullet drawAtPoint:startPoint highlighted:NO];
+                }
 			
 				lastPoint = endPoint;
 			}
@@ -640,9 +655,11 @@
 			[points release];
 		}
 		
+        BOOL isHighlighted = NO;
+        
         if (showMarkerNearPoint) {
-            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2)) 
-                && mousePoint.y > (lastPoint.y - (stepY / 2)) && mousePoint.y < (lastPoint.y + (stepY / 2))) {
+            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2)) && 
+                mousePoint.y > (lastPoint.y - (stepY / 2)) && mousePoint.y < (lastPoint.y + (stepY / 2))) {
                 YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
                 
                 pointInfo.x = lastPoint.x;
@@ -661,6 +678,8 @@
                 }
                 
                 [pointInfo release];
+                
+                isHighlighted = YES;
             }
         } else {
             if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2))) {
@@ -682,12 +701,14 @@
                 }
                 
                 [pointInfo release];
+                
+                isHighlighted = YES;
             }
 		}
         
-		if (drawBullet) {
+		if (drawBullets) {
 			bullet.color = [YBGraphView colorByIndex:i];
-			[bullet drawAtPoint:lastPoint];
+			[bullet drawAtPoint:lastPoint highlighted:isHighlighted];
 		}
 	}
 

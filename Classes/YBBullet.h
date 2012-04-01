@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-enum {
+
+enum YBBulletTypes {
 	YBBulletTypeCircle = 0,
 	YBMarkerTypeSquare = 1
 };
@@ -18,15 +19,18 @@ enum {
 	NSColor *borderColor;
 	NSInteger size;
 	NSInteger borderWidht;
-	NSInteger type;
+	enum YBBulletTypes type;
+    BOOL isHighlighted;
 }
 
 @property (nonatomic, retain) NSColor *color;
 @property (nonatomic, retain) NSColor *borderColor;
 @property (nonatomic, assign) NSInteger size;
 @property (nonatomic, assign) NSInteger borderWidht;
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) enum YBBulletTypes type;
+@property (nonatomic, assign) BOOL isHighlighted;
 
 - (void)drawAtPoint:(NSPoint)point;
+- (void)drawAtPoint:(NSPoint)point highlighted:(BOOL)highlighted;
 
 @end
