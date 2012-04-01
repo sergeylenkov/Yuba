@@ -79,6 +79,9 @@
 	id delegate;
 	id dataSource;
     NSMutableArray *_customMarkers;
+    
+    float _stepX;
+    float _stepY;
 }
 
 @property (nonatomic, retain) NSNumberFormatter *formatter;

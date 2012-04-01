@@ -17,6 +17,8 @@
 
 - (void)drawLegendInRect:(NSRect)rect;
 - (void)drawCustomView:(NSView *)view atPoint:(NSPoint)point inRect:(NSRect)rect;
+- (YBPointInfo *)infoForPoint:(NSPoint)point graphIndex:(NSInteger)graphIndex elementIndex:(NSInteger)elementIndex;
+- (void)drawMarkers:(NSArray *)markers inRect:(NSRect)rect;
 
 @end
 
@@ -180,9 +182,9 @@
 		offsetY = OFFSET_Y;
 	}
 	
-	float minY = 0.0;
+    float minY = 0.0;
 	float maxY = 0.0;
-	
+    
 	for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
 
@@ -216,10 +218,12 @@
 	}
     
 	float step = (maxY - minY) / gridYCount;
-	float stepY = (rect.size.height - (offsetY * 2)) / maxY;
+    
+    _stepX = (self.frame.size.width - (offsetX * 2)) / ([series count] - 1);
+	_stepY = (rect.size.height - (offsetY * 2)) / maxY;
 	
 	if (!useMinValue) {
-		stepY = (rect.size.height - (offsetY * 2)) / (maxY - minY);
+		_stepY = (rect.size.height - (offsetY * 2)) / (maxY - minY);
 	}
 	
 	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -228,9 +232,8 @@
 	NSDictionary *attsDict = [NSDictionary dictionaryWithObjectsAndKeys:textColor, NSForegroundColorAttributeName, font, NSFontAttributeName, [NSNumber numberWithInt:NSNoUnderlineStyle], NSUnderlineStyleAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
 	
 	for (int i = 0; i <= gridYCount; i++) {		
-		int y = (i * step) * stepY;
+		int y = (i * step) * _stepY;
 		float value = i * step + minY;
-		
 		
 		if (drawGridY) {
 			NSBezierPath *path = [NSBezierPath bezierPath];
@@ -292,7 +295,7 @@
 		maxStep = [series count];
 	}
 		
-	float stepX = (self.frame.size.width - (offsetX * 2)) / ([series count] - 1);
+	//_stepX = (self.frame.size.width - (offsetX * 2)) / ([series count] - 1);
 
 	paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	[paragraphStyle setAlignment:NSCenterTextAlignment];
@@ -344,7 +347,7 @@
 		}
         
         for (int i = 1; i < maxStep - 1; i++) {
-            int x = (i * step) * stepX;
+            int x = (i * step) * _stepX;
             
             if (x > self.frame.size.width - (offsetX * 2)) {
                 x = self.frame.size.width - (offsetX * 2);
@@ -411,11 +414,11 @@
 	
 	[paragraphStyle release];
 	
-	stepX = (self.frame.size.width - 120) / ([series count] - 1);
+	_stepX = (self.frame.size.width - 120) / ([series count] - 1);
 	    
     NSPoint lastPoint;
 	
-    NSMutableArray *markers = [[NSMutableArray alloc] init];
+    NSMutableArray *_markers = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < [graphs count]; i++) {
 		NSMutableArray *values = [graphs objectAtIndex:i];
@@ -423,10 +426,10 @@
 		
 		if ([values count] == 1) {
 			int x = (self.frame.size.width) / 2;
-			int y = [[values objectAtIndex:0] floatValue] * stepY;
+			int y = [[values objectAtIndex:0] floatValue] * _stepY;
 			
 			if (!useMinValue) {
-				y = ([[values objectAtIndex:0] floatValue] - minY) * stepY;
+				y = ([[values objectAtIndex:0] floatValue] - minY) * _stepY;
 			}
 			
 			NSPoint point = NSMakePoint(x, y);
@@ -447,7 +450,7 @@
                     continue;
                 }
                      
-				int x = j * stepX;
+				int x = j * _stepX;
 				int y = 0;
 
 				if (useMinValue) {
@@ -457,9 +460,9 @@
                         value = minValue;
                     }
                     
-					y = value * stepY;
+					y = value * _stepY;
 				} else {
-                    y = ([[values objectAtIndex:j] floatValue] - minY) * stepY;
+                    y = ([[values objectAtIndex:j] floatValue] - minY) * _stepY;
                 }
 			
 				NSBezierPath *path = [NSBezierPath bezierPath];
@@ -499,7 +502,7 @@
                         [bullet drawAtPoint:startPoint];
                     }
                     
-                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
+                    if (mousePoint.x > startPoint.x - (_stepX / 2) && mousePoint.x < startPoint.x + (_stepX / 2)) {
                         YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
                         
                         pointInfo.x = startPoint.x;
@@ -511,14 +514,14 @@
                             pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
                         }
                         
-                        [markers addObject:pointInfo];
+                        [_markers addObject:pointInfo];
                         [pointInfo release];
                     }
                     
                     continue;
                 }
                 
-				x = (j + 1) * stepX;
+				x = (j + 1) * _stepX;
 				y = 0;
 		
 				if (useMinValue) {
@@ -528,9 +531,9 @@
                         value = minValue;
                     }
                     
-                    y = value * stepY;
+                    y = value * _stepY;
 				} else {
-                    y = ([[values objectAtIndex:j + 1] floatValue] - minY) * stepY;
+                    y = ([[values objectAtIndex:j + 1] floatValue] - minY) * _stepY;
                 }
 			
 				NSPoint endPoint = NSMakePoint(x + offsetX, y + offsetY);
@@ -557,57 +560,21 @@
 				
                 BOOL isHighlighted = NO;
                 
-                if (showMarkerNearPoint) {
-                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2) && 
-                        mousePoint.y > startPoint.y - (stepY / 2) && mousePoint.y < startPoint.y + (stepY / 2)) {
-                        YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
-                        
-                        pointInfo.x = startPoint.x;
-                        pointInfo.y = startPoint.y;
-                        pointInfo.graph = i;
-                        pointInfo.element = j;
-                        
-                        if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-                            pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
-                        } else {
-                            pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
-                        }
-                        
-                        [markers addObject:pointInfo];
-                        [pointInfo release];
-                        
-                        isHighlighted = YES;
-                    }
-                } else {
-                    if (mousePoint.x > startPoint.x - (stepX / 2) && mousePoint.x < startPoint.x + (stepX / 2)) {
-                        YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
-
-                        pointInfo.x = startPoint.x;
-                        pointInfo.y = startPoint.y;
-                        pointInfo.graph = i;
-                        pointInfo.element = j;
-                        
-                        if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-                            pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:j];
-                        } else {
-                            pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:j]];
-                        }
-                    
-                        [markers addObject:pointInfo];
-                        [pointInfo release];
-                        
-                        isHighlighted = YES;
-                    }
+                YBPointInfo *pointInfo = [self infoForPoint:startPoint graphIndex:i elementIndex:j];
+                
+                if (pointInfo) {
+                    [_markers addObject:pointInfo];
+                    isHighlighted = YES;
                 }
                 
 				if (drawBullets) {
-                    if (!highlightBullet) {
+                    if (!highlightBullet || !enableMarker) {
                         isHighlighted = NO;
                     }
                     
 					bullet.color = [YBGraphView colorByIndex:i];
 					[bullet drawAtPoint:startPoint highlighted:isHighlighted];
-				} else if (highlightBullet && isHighlighted) {
+				} else if (highlightBullet && isHighlighted && enableMarker) {
                     bullet.color = [YBGraphView colorByIndex:i];
 					[bullet drawAtPoint:startPoint highlighted:NO];
                 }
@@ -657,66 +624,29 @@
 		
         BOOL isHighlighted = NO;
         
-        if (showMarkerNearPoint) {
-            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2)) && 
-                mousePoint.y > (lastPoint.y - (stepY / 2)) && mousePoint.y < (lastPoint.y + (stepY / 2))) {
-                YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
-                
-                pointInfo.x = lastPoint.x;
-                pointInfo.y = lastPoint.y;
-                pointInfo.graph = i;
-                pointInfo.element = [values count] - 1;
-                
-                if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
-                    if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-                        pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
-                    } else {
-                        pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1]];
-                    }
-                    
-                    [markers addObject:pointInfo];
-                }
-                
-                [pointInfo release];
-                
-                isHighlighted = YES;
-            }
-        } else {
-            if (mousePoint.x > (lastPoint.x - (stepX / 2)) && mousePoint.x < (lastPoint.x + (stepX / 2))) {
-                YBPointInfo *pointInfo = [[YBPointInfo alloc] init];
-			
-                pointInfo.x = lastPoint.x;
-                pointInfo.y = lastPoint.y;
-                pointInfo.graph = i;
-                pointInfo.element = [values count] - 1;
-                
-                if (![[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1] isKindOfClass:[NSNull class]]) {
-                    if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
-                        pointInfo.title = [dataSource graphView:self markerTitleForGraph:i forElement:[values count] - 1];
-                    } else {
-                        pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:i] objectAtIndex:[values count] - 1]];
-                    }
-                
-                    [markers addObject:pointInfo];
-                }
-                
-                [pointInfo release];
-                
-                isHighlighted = YES;
-            }
-		}
+        YBPointInfo *pointInfo = [self infoForPoint:lastPoint graphIndex:i elementIndex:[values count] - 1];
         
-		if (drawBullets) {
-			bullet.color = [YBGraphView colorByIndex:i];
-			[bullet drawAtPoint:lastPoint highlighted:isHighlighted];
-		}
+        if (pointInfo) {
+            [_markers addObject:pointInfo];
+            isHighlighted = YES;
+        }
+        
+        if (drawBullets) {
+            if (!highlightBullet || !enableMarker) {
+                isHighlighted = NO;
+            }
+            
+            bullet.color = [YBGraphView colorByIndex:i];
+            [bullet drawAtPoint:lastPoint highlighted:isHighlighted];
+        } else if (highlightBullet && isHighlighted && enableMarker) {
+            bullet.color = [YBGraphView colorByIndex:i];
+            [bullet drawAtPoint:lastPoint highlighted:NO];
+        }
 	}
 
 	if (drawLegend) {
 		[self drawLegendInRect:rect];
 	}
-	
-	// draw info
 	
 	if (drawInfo) {
 		NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -728,33 +658,10 @@
 		
 		[paragraphStyle release];
 	}
-	
-	// draw markers
 
-	if (showMarker && !hideMarker && enableMarker) {
-        for (NSView *view in _customMarkers) {
-            [view removeFromSuperview];
-        }
-        
-        [_customMarkers removeAllObjects];
-         
-        for (YBPointInfo *pointInfo in markers) {
-            NSPoint point;
-            point.x = pointInfo.x;
-            point.y = pointInfo.y;
-            
-            if ([dataSource respondsToSelector:@selector(graphView: markerViewForGraph: forElement:)]) {
-                NSView *customMarker = [dataSource graphView:self markerViewForGraph:pointInfo.graph forElement:pointInfo.element];
-                
-                [self drawCustomView:customMarker atPoint:point inRect:rect];
-                [_customMarkers addObject:customMarker];
-            } else {
-                [marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
-            }
-        }
-	}
+	[self drawMarkers:_markers inRect:rect];
     
-    [markers release];
+    [_markers release];
     
     if (drawBottomMarker) {
         NSRectFill(NSMakeRect(100, 0, 120, 20));
@@ -770,6 +677,10 @@
         [paragraphStyle release];
     }
 }
+
+#pragma mark -
+#pragma mark Private
+#pragma mark -
 
 - (void)drawLegendInRect:(NSRect)rect {
 	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
@@ -815,6 +726,71 @@
     [self addSubview:customView];
 }
 
+- (YBPointInfo *)infoForPoint:(NSPoint)point graphIndex:(NSInteger)graphIndex elementIndex:(NSInteger)elementIndex {
+    if (showMarkerNearPoint) {
+        if (mousePoint.x > point.x - (_stepX / 2) && mousePoint.x < point.x + (_stepX / 2) && 
+            mousePoint.y > point.y - (_stepY / 2) && mousePoint.y < point.y + (_stepY / 2)) {
+            YBPointInfo *pointInfo = [[[YBPointInfo alloc] init] autorelease];
+            
+            pointInfo.x = point.x;
+            pointInfo.y = point.y;
+            pointInfo.graph = graphIndex;
+            pointInfo.element = elementIndex;
+            
+            if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                pointInfo.title = [dataSource graphView:self markerTitleForGraph:graphIndex forElement:elementIndex];
+            } else {
+                pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:graphIndex] objectAtIndex:elementIndex]];
+            }
+            
+            return pointInfo;
+        }
+    } else {
+        if (mousePoint.x > point.x - (_stepX / 2) && mousePoint.x < point.x + (_stepX / 2)) {
+            YBPointInfo *pointInfo = [[[YBPointInfo alloc] init] autorelease];
+            
+            pointInfo.x = point.x;
+            pointInfo.y = point.y;
+            pointInfo.graph = graphIndex;
+            pointInfo.element = elementIndex;
+            
+            if ([dataSource respondsToSelector:@selector(graphView: markerTitleForGraph: forElement:)]) {
+                pointInfo.title = [dataSource graphView:self markerTitleForGraph:graphIndex forElement:elementIndex];
+            } else {
+                pointInfo.title = [formatter stringFromNumber:[[graphs objectAtIndex:graphIndex] objectAtIndex:elementIndex]];
+            }
+            
+            return pointInfo;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)drawMarkers:(NSArray *)markers inRect:(NSRect)rect {
+    if (showMarker && !hideMarker && enableMarker) {
+        for (NSView *view in _customMarkers) {
+            [view removeFromSuperview];
+        }
+        
+        [_customMarkers removeAllObjects];
+        
+        for (YBPointInfo *pointInfo in markers) {
+            NSPoint point;
+            point.x = pointInfo.x;
+            point.y = pointInfo.y;
+            
+            if ([dataSource respondsToSelector:@selector(graphView: markerViewForGraph: forElement:)]) {
+                NSView *customMarker = [dataSource graphView:self markerViewForGraph:pointInfo.graph forElement:pointInfo.element];
+                
+                [self drawCustomView:customMarker atPoint:point inRect:rect];
+                [_customMarkers addObject:customMarker];
+            } else {
+                [marker drawAtPoint:point inRect:rect withTitle:pointInfo.title];
+            }
+        }
+	}
+}
 
 #pragma mark -
 #pragma mark Mouse Events
